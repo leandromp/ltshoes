@@ -18,7 +18,14 @@
                 </div>
                 <div class="footer">                                                               
                     <button type="submit" class="btn bg-olive btn-block">Identificarse</button>  
-                    
+                    <? if(isset($mensaje)): ?>
+                    <br>
+                     <div class="alert alert-danger alert-dismissable">
+                        <i class="fa fa-ban"></i>
+                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                      <b>Alerta!</b> <?=$mensaje?>
+                    </div>
+                    <?endif?>
                     <p><a href="#">Olvide Mi Contrase&ntilde;a</a></p>
                 </div>
             </form>
@@ -27,4 +34,4 @@
 
 <? $this->load->view('carabiner-js'); ?>
 
-    </body>
+</body>

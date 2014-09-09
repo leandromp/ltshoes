@@ -6,6 +6,13 @@
 	 	{
 			$this->load->view('login');
 	 	}
+
+	 	public function dashboard()
+	 	{
+	 		$this->load->library('menu');
+	 		$variables['menu'] = $this->menu->dame_menu();
+	 		$this->load->view('dashboard/index',$variables);
+	 	}
 	 
 	 }
 	 

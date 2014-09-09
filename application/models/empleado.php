@@ -5,10 +5,10 @@
 		public function comprobarLogeo($nombre,$password)
 		{
 			$query=$this->db->get_where('empleado',array('nombre'=>$nombre,'password'=>$password));
-			$result = $query->resul_array();
-			$cant = count($result);
-			if($result==1)
-				return $resul;
+			$resultado = $query->result_array();
+			$cant = count($resultado);
+			if($cant==1)
+				return $resultado[0];
 			else
 				return false;
 		}

@@ -9,22 +9,36 @@
 
 		public function login()
 		{
-			$datos['nombre']=$this->input->post("nombre");
-			$datos['password']=$this->input->post("password");
-			if ($datos['nombre']!="" AND $datos["password"]!="")
+			$nombre=$this->input->post("nombre");
+			$password=$this->input->post("password");
+			if ($nombre!="" AND $password!="")
 			{
-				$resutlado=$this->load->model("empleado","empleado",true);
-				if ($resutlado==false)
-					echo 'los datos ingresados no son correctos intentelo nuevamente';
+				$this->load->model("empleado","empleado",true);
+				$resultado=$this->empleado->comprobarLogeo($nombre,$password);
+				if ($resultado)
+					{
+						$sesion['nombre']=$resultado['nombre'];
+						$sesion['apellido']=$resultado['apellido'];
+						$sesion['usuario']=$resultado['usuario'];
+						$sesion['correo']=$resultado['correo'];
+						$sesion['ultimo_acceso']=date('Y-m-d h:m:s');
+						$sesion['usuario_id']=$resultado['id'];
+						$this->session->set_userdata('ltshoes',$sesion);
+						header('location:'.site_url('/home/dashboard'));
+					}
 				else
-					echo 'logeado correctamente';
+					$variables['mensaje']="Los datos ingresados no son correctos, Intentelo nuevamente";
+					
 			}
 			else
-				echo 'Debe ingresar ambos datos para poder identificarse';
+				$variables['mensaje']= 'Debe ingresar ambos datos para poder identificarse';
+
+			$this->load->view('login',$variables);
 
 		}
-	
-	}
+
+		
+}
 	
 	/* End of file empleados.php */
 	/* Location: ./application/controllers/empleados.php */
