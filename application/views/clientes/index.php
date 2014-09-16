@@ -1,6 +1,5 @@
-<?php 
-
-	$carpeta="modulos/";
+<?php
+	$carpeta="clientes/";
 	$this->load->view('cabecera');
 	$this->load->view('home');
 	if (!isset($vista))

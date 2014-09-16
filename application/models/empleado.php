@@ -13,6 +13,17 @@
 				return false;
 		}
 		
+		public function getPermisos($usuario_id,$modulo_id)
+		{
+			$this->db->where("usuario_id",$usuario_id);
+			$this->db->where("modulo_id",$modulo_id);
+			$query=$this->db->get("permiso");
+			$resultado=$query->result_array();
+			if(count($resultado)>0)
+				return $resultado[0];
+			else
+				return false;
+		}
 	
 	}
 	

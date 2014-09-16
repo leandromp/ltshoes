@@ -15,11 +15,13 @@
                 <section class="content">
                     <div class="md-col-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Nuevo <?=$this->uri->segment(1)?> </button> </a> </div>
                     <br>
+                    
                     <div class="box">
                                 <div class="box-header" id="recargar">
                                     <div class="col-md-11"> <h3 class="box-title">Hover Data Table</h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
+                                <? if($clientes): ?>
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -31,7 +33,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?foreach ($menu as $key => $value) :?>
+                                           <?foreach ($clientes as $key => $value) :?>
                                                 <tr>
                                                     <td><?=$value['nombre']?></td>
                                                     <td><?=$value['ruta']?></td>
@@ -50,10 +52,11 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <? endif; ?>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
+                    
                 </section>
                             
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-

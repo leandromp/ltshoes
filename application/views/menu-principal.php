@@ -30,7 +30,7 @@
                     <?foreach ($menu as $key => $value): ?>
                         <li>
                             <a href="<?=site_url($value['ruta'])?>">
-                                <i class="<?=$value['icono']?>"></i> <span><?=$value['nombre']?></span>
+                                <i class="fa <?=$value['icono']?>"></i> <span><?=$value['nombre']?></span>
                             </a>
                         </li>
                     <?endforeach;?>
