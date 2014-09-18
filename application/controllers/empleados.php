@@ -23,6 +23,7 @@
 						$sesion['correo']=$resultado['correo'];
 						$sesion['ultimo_acceso']=date('Y-m-d h:m:s');
 						$sesion['usuario_id']=$resultado['id'];
+						$sesion['perfil_id']=$resultado['perfil_id'];
 						$this->session->set_userdata('ltshoes',$sesion);
 						header('location:'.site_url('/home/dashboard'));
 					}

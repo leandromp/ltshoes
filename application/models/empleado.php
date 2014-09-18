@@ -24,6 +24,17 @@
 			else
 				return false;
 		}
+
+		public function getPerfiles()
+		{
+			$query=$this->db->get("perfil");
+			$resultado=$query->result_array();
+			if(count($resultado)>0)
+				return $resultado;
+			else
+				return false;
+
+		}
 	
 	}
 	

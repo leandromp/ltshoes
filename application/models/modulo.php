@@ -2,9 +2,32 @@
 	
 	class Modulo extends CI_Model {
 	
+		public function listado($usuario_id=0)
+		{
+			if($usuario_id==0)
+				$usuario_id=$this->input->post("perfil");
+
+			$sql="SELECT m.nombre, p.* FROM modulo m
+			 	   LEFT JOIN permiso p on m.id=p.modulo_id
+			 	   WHERE usuario_id=".$usuario_id;
+			$query = $this->db->query($sql);
+			$resultado = $query->result_array();
+			if (count($resultado)>0)
+			{
+				return $resultado;
+			}
+			else
+				return false;
+
+		}
+
+
 		public function insert($datos)
 		{
-			$this->db->insert('modulo',$datos);
+			if($this->db->insert('modulo',$datos))
+				return $modulo_id=$this->db->insert_id();
+			else
+				return false;
 
 		}	
 

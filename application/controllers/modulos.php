@@ -23,10 +23,24 @@ class Modulos extends CI_Controller
 				if ($datos['nombre']!="" and $datos['ruta']!="")
 				{
 					$this->load->model('modulo','modulo',true);
-					$resupuesta=$this->modulo->insert($datos);
+					$modulo_id=$this->modulo->insert($datos);
+					//cargo todos los perfiles para hacer un insert por cada uno en la tabla 
+					//permisos pero con los campos en 0
+					$this->load->model("permiso","permiso",true);
+					$perfiles=$this->permiso->getPerfiles();
+					foreach ($perfiles as $key => $value) 
+					{
+						if ($this->permiso->insertEmpty($modulo_id,$value['id']))
+							$variables['mensaje'] = 'Datos Actualizados correctamente';
+						else
+							$variables['mensaje'] = 'error en la base de datos';
+
+					}
 				}
-				elseif ($alert==0){  //debo mostar las alertas
-						$variables['mensaje']="Falta los datos requeridos para poder dar de alta el modulo";
+				else
+				{  
+					if($alert==0)	//debo mostar las alertas
+					$variables['mensaje']="Falta los datos requeridos para poder dar de alta el modulo";
 				}
 				$variables['vista']='form-inc';
 
@@ -88,6 +102,53 @@ class Modulos extends CI_Controller
 			else
 				header('location:'.site_url());
 		}
+
+		public function permisos($update=0)
+		{
+			$user = $this->session->userdata("ltshoes");
+			if ($user['usuario_id']>0 and $user['perfil_id']==1)
+			{
+				$this->load->model("modulo","modulo",true);
+				$this->load->model("empleado","empleado",true);
+				if($update==0)
+				{
+					$resultado = $this->modulo->listado($user['usuario_id']);
+					$perfiles = $this->empleado->getPerfiles();
+					$variables['permisos'] = $resultado;
+					$variables['perfiles']= $perfiles;
+					$variables['vista']='permisos-inc';
+					$this->index($variables);
+				}
+				else
+				{
+					//rama para hacer el update de permisos de la tabla
+					echo count($resultado = $this->modulo->listado($user['usuario_id']));
+					$valor=$this->input->post("1-1");
+				}
+				
+				
+			}
+			else
+			{
+				echo 'no tiene permisos para acceder al modulo';
+			}
+		}
+
+		public function cambiar_perfil()
+		{
+			$perfil_id=$this->input->post("perfil");
+			if($perfil_id>0)
+			{
+				$this->load->model("empleado","empleado",true);
+				$perfiles = $this->empleado->getPerfiles();
+				$variables['perfiles']=$perfiles;
+				// arriba vuelvo a cargar los perfiles
+				$this->load->model("modulo","modulo",true);
+				$variables['permisos'] = $this->modulo->listado($perfil_id);
+				$this->load->view("modulos/permisos-inc",$variables);
+			}
+		}
+
 }
 	
 	/* End of file modulo.php */

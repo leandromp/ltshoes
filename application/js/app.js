@@ -15,3 +15,11 @@ function eliminar (id,controlador)
 		}
 	});
 }
+
+function cambiar_perfil()
+{
+	var perfil=$("#perfil").val();
+	$.post(URL_BASE+'modulos/cambiar_perfil',{perfil:perfil},function(data){
+		$("#cuerpo").html(data);
+	});
+}
