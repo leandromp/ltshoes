@@ -28,39 +28,19 @@
 
           <!-- date-range-picker -->
         <script src="<?=URL_BASE?>/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        
-     
+        <!-- Jquery validator -->
+        <script src="<?=URL_BASE?>/js/bootstrapValidator.min.js" type="text/javascript"></script>
       
         <!-- DATA TABES SCRIPT -->
         <script src="<?=URL_BASE?>/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="<?=URL_BASE?>/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
        
 
-
-
-
-
+         
 
         <!-- AdminLTE App -->
         <script src="<?=URL_BASE?>/js/AdminLTE/app.js" type="text/javascript"></script>
 
         <script src="<?=URL_BASE?>/js/app.js"></script>
-        
-      
-
-        <script type="text/javascript">
-            $(function() {
-                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-
-                $("#example1").dataTable();
-                
-                $('#example2').dataTable({
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": false,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bAutoWidth": false
-                });
-            });
-        </script>
+        <!-- reglas para la validacion -->
+        <script src="<?=URL_BASE?>/js/validacion.js"></script>  <!-- archivo para validar los formularios -->

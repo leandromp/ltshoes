@@ -14,45 +14,72 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="box box-primary">
-                    <form role="form" method="post" action="<?=site_url($modulo_nombre.'/'.$accion)?>">
+                    <form role="form" method="post" action="<?=site_url($modulo_nombre.'/'.$accion)?>" id="clientes-form">
                        <div class="box-header">
                        <h3 class="box-title"><?=strtoupper($accion)?></h3> 
                        </div>
                        <div class="box-body">
-                          <div class="form-group">
-                                <input id="id" readonly class="form-control" type="hidden" name="id" placeholder="id del modulo" value="<? if(isset($modulo)) echo $modulo['id'];?>" >
-                          </div> 
                            <div class="form-group">
+                                <input id="id" readonly class="form-control" type="hidden" name="id"  value="<? if(isset($modulo)) echo $modulo['id'];?>" >
+                           </div> 
+                           <div class="col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Nombre</label>
-                                <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre del modulo" value="<? if(isset($modulo)) echo $modulo['nombre'];?>" >
+                                <input id="nombre" class="form-control" type="text" name="nombre" value="<? if(isset($modulo)) echo $modulo['nombre'];?>" >
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Apellido</label>
-                                <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre del modulo" value="<? if(isset($modulo)) echo $modulo['nombre'];?>" >
+                                <input id="nombre" class="form-control" type="text" name="apellido" value="<? if(isset($modulo)) echo $modulo['nombre'];?>" >
                             </div>
 
-                            <div class="form-group">
+                            <div class=" col-xs-6 form-group">
+                                <label for="exampleInputEmail1">Documento (DNI)</label>
+                                <input id="dni" class="form-control" type="text" name="dni" value="<? if(isset($modulo)) echo $modulo['nombre'];?>" >
+                            </div>
+
+                            <div class=" col-xs-6 form-group">
                                         <label>Fecha de Nacimiento:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask/>
+                                            <input type="text" name="fecha" class="form-control" id="fecha" />
                                         </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
+                            </div><!-- /.form group -->
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Dirección</label>
-                                <input id="accion" class="form-control" type="text" name="accion" placeholder="Accion" value="<? if(isset($modulo)) echo $modulo['ruta'];?>">
+                            <div class="col-xs-6 form-group">
+                                <label for="">Dirección</label>
+                                <input id="direccion" class="form-control" type="text" name="direccion"   value="<? if(isset($modulo)) echo $modulo['ruta'];?>">
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Telefóno</label>
-                                <input id="icono" class="form-control" type="text" name="icono" placeholder="Icono" value="<? if(isset($modulo)) echo $modulo['icono'];?>">
+                            <div class="col-xs-6 form-group">
+                                <label for="">Telefóno</label>
+                                <input id="telefono" class="form-control" type="text" name="telefono"  value="<? if(isset($modulo)) echo $modulo['icono'];?>">
                             </div>
+
+                            <div class="col-xs-6 form-group">
+                                <label for="">Dirección Laboral</label>
+                                <input id="direccion_laboral" class="form-control" type="text" name="direccion_laboral"   value="<? if(isset($modulo)) echo $modulo['ruta'];?>">
+                            </div>
+
+                            <div class="col-xs-6 form-group">
+                                <label for="">Telefóno Laboral</label>
+                                <input id="telefono_laboral" class="form-control" type="text" name="telefono_laboral"  value="<? if(isset($modulo)) echo $modulo['icono'];?>">
+                            </div>
+
+                            <div class="col-xs-6 form-group">
+                                <label for="">Localidad</label>
+                                <select id="localidad" class="form-control" type="text" name="localidad"   value="<? if(isset($modulo)) echo $modulo['ruta'];?>">
+                                </select>
+                            </div>
+
+                            <div class="col-xs-6 form-group">
+                                <label for="">Barrio</label>
+                                <input id="barrio" class="form-control" type="text" name="barrio"   value="<? if(isset($modulo)) echo $modulo['ruta'];?>">
+                            </div>
+
                             <?if(isset($error) and $error!=""):?>
                              <div class="alert alert-danger alert-dismissable">
                                 <i class="fa fa-ban"></i>
@@ -60,16 +87,21 @@
                                               <b>Alerta!</b> <?=$mensaje?>
                             </div>
                             <?endif;?>
-                            <div class="box-footer">
-                            <button class="btn btn-primary"  type="submit">Enviar</button> 
-                            <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
-                            </div>
+                              
                        </div>
 
+                       <div class="box-footer">
+                      <button class="btn btn-primary"  type="submit">Enviar</button> 
+                      <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
+                      </div>
+          
+
+                            
+                      
                     </form>
-                    </div>
                 </div>
+                </div><!-- class="col-md-12" -->
                 </section>
                             
             </aside><!-- /.right-side -->
-        </div><!-- ./wrapper -->
+        <!--</div>./wrapper -->

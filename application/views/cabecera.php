@@ -23,8 +23,10 @@
         <link href="<?=URL_BASE;?>/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="<?=URL_BASE;?>/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <!-- Validator Jquery Css -->
+        <link href="<?=URL_BASE;?>/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
 
-       
+         
         <!-- DATA TABLES -->
         <link href="<?=URL_BASE;?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 

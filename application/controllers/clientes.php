@@ -36,6 +36,16 @@
 					$permisos=$this->empleado->getPermisos($user['usuario_id'],19);
 					if($permisos['alta']==1)
 					{
+						$datos["nombre"] = $this->input->post("nombre");
+						$datos["apellido"] = $this->input->post("apellido");
+						$datos["dni"] = $this->input->post("dni");
+						$datos["direccion"] = $this->input->post("direccion");
+						$datos["telefono"] = $this->input->post("telefono");
+						$datos["localidad"] = $this->input->post("localidad");
+						$datos["barrio"] = $this->input->post("barrio");
+						$datos["direccion_laboral"] = $this->input->post("direccion_laboral");
+						$datos["telefono_laboral"] = $this->input->post("telefono_laboral");
+						
 						$variables['vista']="form-inc";
 						$this->index($variables);
 					}
