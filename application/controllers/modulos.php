@@ -110,10 +110,10 @@ class Modulos extends CI_Controller
 			{
 				$this->load->model("modulo","modulo",true);
 				$this->load->model("empleado","empleado",true);
+				$perfiles = $this->empleado->getPerfiles();
 				if($update==0)
 				{
 					$resultado = $this->modulo->listado($user['usuario_id']);
-					$perfiles = $this->empleado->getPerfiles();
 					$variables['permisos'] = $resultado;
 					$variables['perfiles']= $perfiles;
 					$variables['vista']='permisos-inc';
@@ -121,9 +121,44 @@ class Modulos extends CI_Controller
 				}
 				else
 				{
-					//rama para hacer el update de permisos de la tabla
-					echo count($resultado = $this->modulo->listado($user['usuario_id']));
-					$valor=$this->input->post("1-1");
+					
+					$perfil_id=$this->input->post("perfil_id");
+					if($perfil_id>0)//corroboro que el perfil de usuario exista;
+					{
+						//obtengo la cantidad de modulos del sistema
+						$modulos=$this->modulo->getAll();
+						$this->load->model("permiso","permiso",true);
+						foreach ($modulos as $key => $value) {
+							//echo 'modulo_id es'.$value['id'];
+						 	for ($i=1; $i < 5 ; $i++) { 
+						 		$value['id'].'-'.$i;
+						 		$columna=array(1=>'alta',2=>'baja',3=>'modificacion',4=>'consulta');
+						 		$opcion=$this->input->post($value['id'].'-'.$i);
+
+						 		if($opcion=='on')
+						 			$valor_update=1;
+						 		else
+						 			$valor_update=0;
+						 		if(!$this->permiso->updateSimple($value['id'],$perfil_id,$columna[$i],$valor_update))
+						 			$variables['error']= 'lo sentimos hubo un error al actulizar la base de datos.';
+						 		else
+						 			$variables['mensaje']="Modificaciones Guardadas Correctamente";
+						 			
+							 	}
+							 $variables['perfiles']=$perfiles;
+							 $variables['permisos']=$this->modulo->listado($user['usuario_id']);;
+						}
+					}
+					else
+					{
+						$variables['permisos'] = "";
+
+						$variables['error']="no ha seleccionado ningun perfil de usuario";
+					}
+					
+
+					$variables['vista']="permisos-inc";
+					$this->index($variables);
 				}
 				
 				
@@ -144,6 +179,7 @@ class Modulos extends CI_Controller
 				$variables['perfiles']=$perfiles;
 				// arriba vuelvo a cargar los perfiles
 				$this->load->model("modulo","modulo",true);
+				$variables['perfil_seleccionado']=$perfil_id;
 				$variables['permisos'] = $this->modulo->listado($perfil_id);
 				$this->load->view("modulos/permisos-inc",$variables);
 			}

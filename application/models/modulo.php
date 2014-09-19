@@ -1,7 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
 	class Modulo extends CI_Model {
-	
+		
+		public function getAll()
+		{	
+			$query=$this->db->get("modulo");
+			$resultado = $query->result_array();
+			if (count($resultado)>0)
+			{
+				return $resultado;
+			}
+			else
+				return false;
+		}
 		public function listado($usuario_id=0)
 		{
 			if($usuario_id==0)

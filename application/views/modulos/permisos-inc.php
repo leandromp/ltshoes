@@ -24,10 +24,11 @@
                                         
                                      </div>
                                      <div class="col-md-6 form-group">
-                                        <select id="perfil" onchange="cambiar_perfil();">
+                                        <select name="perfil_id" id="perfil" onchange="cambiar_perfil();">
                                             <option value="0">Ninguno</option>
                                             <? foreach ($perfiles as $k => $v):?>
-                                            <option value="<?=$v['id']?>"> <?=$v['perfil_nombre']?> </option>
+                                            <? if(!isset($perfil_seleccionado)) $perfil_seleccionado=0?>
+                                            <option <?if($perfil_seleccionado==$v['id']) echo 'selected'?> value="<?=$v['id']?>"> <?=$v['perfil_nombre']?> </option>
                                             <?endforeach;?>
                                         </select>
                                         </div>
@@ -48,10 +49,10 @@
                                             <?foreach ($permisos as $key => $value) :?>
                                                 <tr>
                                                     <td><?=$value['nombre']?></td>
-                                                    <td><input name="<?=$value['id']?>-1" type="checkbox" <? if($value['alta']==1) echo 'checked'?> > </td>
-                                                    <td><input name="<?=$value['id']?>-2" type="checkbox" <? if($value['baja']==1) echo 'checked'?> >  </td>
-                                                    <td><input name="<?=$value['id']?>-3" type="checkbox" <? if($value['modificacion']==1) echo 'checked'?> >  </td>
-                                                    <td><input name="<?=$value['id']?>-4" type="checkbox" <? if($value['consulta']==1) echo 'checked'?> >  </td>
+                                                    <td><input name="<?=$value['modulo_id']?>-1" type="checkbox" <? if($value['alta']==1) echo 'checked'?> > </td>
+                                                    <td><input name="<?=$value['modulo_id']?>-2" type="checkbox" <? if($value['baja']==1) echo 'checked'?> >  </td>
+                                                    <td><input name="<?=$value['modulo_id']?>-3" type="checkbox" <? if($value['modificacion']==1) echo 'checked'?> >  </td>
+                                                    <td><input name="<?=$value['modulo_id']?>-4" type="checkbox" <? if($value['consulta']==1) echo 'checked'?> >  </td>
                                                 </tr>    
                                             <?endforeach;?>
                                         </tbody>
@@ -67,6 +68,12 @@
                                 </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
+                            <? if(isset($mensaje)): ?>
+                                <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
+                            <? endif ?>
+                            <?if(isset($error)): ?>
+                                <div class="alert alert-danger alert-dismissable"> <?=$error?> </div>
+                            <?endif?>
                 </section>
                             
             </aside><!-- /.right-side -->
