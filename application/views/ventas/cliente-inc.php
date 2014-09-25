@@ -30,7 +30,7 @@
                                                 <th>Documento</th>
                                                 <th>Telefono</th>
                                                 <th>Editar</th>
-                                                <th>Eliminar</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -40,8 +40,8 @@
                                                     <td><?=$value['apellido']?></td>
                                                     <td><?=$value['dni']?></td>
                                                     <td><?=$value['telefono']?></td>
-                                                    <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
-                                                    <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
+                                                    <td><a href="<?=site_url($modulo_nombre.'/seleccionar_cliente/'.$value['id']);?>"> <button role="button" class="btn btn-default"> seleccionar </button> </a> </td>
+                                                    
                                             <?endforeach;?>
                                         </tbody>
                                         <tfoot>
@@ -51,7 +51,7 @@
                                                 <th>Documento</th>
                                                 <th>Telefono</th>
                                                 <th>Editar</th>
-                                                <th>Eliminar</th>
+                                      
                                             </tr>
                                         </tfoot>
                                     </table>

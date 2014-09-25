@@ -13,12 +13,12 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                    <div class="md-col-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Nuevo <?=$this->uri->segment(1)?> </button> </a> </div>
+                    <div class="md-col-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Nueva <?=$this->uri->segment(1)?> </button> </a> </div>
                     <br>
                     
                     <div class="box">
                                 <div class="box-header" id="recargar">
-                                    <div class="col-md-11"> <h3 class="box-title">Hover Data Table</h3> </div>
+                                    <div class="col-md-11"> <h3 class="box-title"><?=strtoupper($modulo_nombre);?></h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
                                 <? if($clientes): ?>

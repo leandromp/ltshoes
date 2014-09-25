@@ -18,38 +18,38 @@
                     
                     <div class="box">
                                 <div class="box-header" id="recargar">
-                                    <div class="col-md-11"> <h3 class="box-title">Hover Data Table</h3> </div>
+                                    <div class="col-md-11"> <h3 class="box-title"><?=strtoupper($modulo_nombre);?></h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                <? if($clientes): ?>
+                                <? if($productos): ?>
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Documento</th>
-                                                <th>Telefono</th>
+                                                <th>Codigo</th>
+                                                <th>descripcion</th>
+                                                <th>precio</th>
+                                                <th>tipo</th>
                                                 <th>Editar</th>
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <?foreach ($clientes as $key => $value) :?>
+                                           <?foreach ($productos as $key => $value) :?>
                                                 <tr>
-                                                    <td><?=$value['nombre']?></td>
-                                                    <td><?=$value['apellido']?></td>
-                                                    <td><?=$value['dni']?></td>
-                                                    <td><?=$value['telefono']?></td>
+                                                    <td><?=$value['codigo']?></td>
+                                                    <td><?=$value['descripcion']?></td>
+                                                    <td><?=$value['precio']?></td>
+                                                    <td><?=$value['tipo']?></td>
                                                     <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
                                                     <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                             <?endforeach;?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Documento</th>
-                                                <th>Telefono</th>
+                                                <th>Codigo</th>
+                                                <th>descripcion</th>
+                                                <th>precio</th>
+                                                <th>tipo</th>
                                                 <th>Editar</th>
                                                 <th>Eliminar</th>
                                             </tr>
@@ -58,7 +58,12 @@
                                     <? endif; ?>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
-                    
+                            <? if(isset($mensaje)): ?>
+                                <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
+                            <? endif ?>
+                            <?if(isset($error)): ?>
+                                <div class="alert alert-danger alert-dismissable"> <?=$error?> </div><br>
+                            <?endif?>
                 </section>
                             
             </aside><!-- /.right-side -->

@@ -44,3 +44,17 @@
         <script src="<?=URL_BASE?>/js/app.js"></script>
         <!-- reglas para la validacion -->
         <script src="<?=URL_BASE?>/js/validacion.js"></script>  <!-- archivo para validar los formularios -->
+
+         <script type="text/javascript">
+            $(function() {
+                $("#example1").dataTable();
+                $('#example2').dataTable({
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": false,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bAutoWidth": false
+                });
+            });
+        </script>

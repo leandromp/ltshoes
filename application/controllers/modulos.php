@@ -27,7 +27,7 @@ class Modulos extends CI_Controller
 					//cargo todos los perfiles para hacer un insert por cada uno en la tabla 
 					//permisos pero con los campos en 0
 					$this->load->model("permiso","permiso",true);
-					$perfiles=$this->permiso->getPerfiles();
+					echo $perfiles=$this->permiso->getPerfiles();
 					foreach ($perfiles as $key => $value) 
 					{
 						if ($this->permiso->insertEmpty($modulo_id,$value['id']))
@@ -42,6 +42,7 @@ class Modulos extends CI_Controller
 					if($alert==0)	//debo mostar las alertas
 					$variables['mensaje']="Falta los datos requeridos para poder dar de alta el modulo";
 				}
+
 				$variables['vista']='form-inc';
 
 				$this->index($variables);

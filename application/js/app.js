@@ -23,3 +23,14 @@ function cambiar_perfil()
 		$("#cuerpo").html(data);
 	});
 }
+
+function agregar_producto_carrito(id)
+{
+	alert(id);
+	//var cantidad="#cantidad-"+id;
+	var cantidad=$("#cantidad-"+id).val();
+	//alert(cantidad);
+	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad},function(data){
+
+	});
+}
