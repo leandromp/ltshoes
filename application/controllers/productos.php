@@ -162,9 +162,86 @@
 						$this->index($variables);
 					}
 			}
+
+			public function talles($id)
+			{
+				$user=$this->session->userdata("ltshoes");
+					if($user['usuario_id']>0)
+					{
+						$this->load->model("empleado","empleado",true);
+						$permisos=$this->empleado->getPermisos($user['usuario_id'],19);
+						if($permisos['modificacion']==1)
+						{
+							
+							if($id>0) //si el id vi
+							{
+								$this->load->model("producto","producto",true);
+								$resultado = $this->producto->getTalles($id);
+								if($resultado)
+								{
+									$variables['producto']=$this->producto->getProductoId($id);
+									$variables['talles']=$resultado;
+									$variables['vista']='talles-inc';
+								}
+								else
+									$mensaje['este producto no tiene ningun talle asociado'];
+							}
+							else
+								$mensaje['no selecciono ningun producto'];
+
+						}
+
+						$this->index($variables);
+					}
+			}
 		
 
+			public function dame_talles()
+			{
+				$id=$this->input->post("producto_id");
+				$this->load->model("producto","producto",true);
+				$talles = $this->producto->getComboTalles($id);
+				echo json_encode($talles);
+			}
 
+			public function guardar_talle()
+			{
+				$id_producto = $this->input->post("id_producto");
+				$datos['talle'] = trim($this->input->post("talle"));
+				$datos['cantidad'] = $this->input->post("cantidad");
+				if ($datos['cantidad']>0)
+				{
+					$this->load->model("talle","talle",true);
+					$resultado = $this->talle->getTalleId($id_producto,$datos['talle']);
+					//print_r($resultado); 
+					if ($resultado['cantidad']>0)
+					{
+						$cantidad=$resultado['cantidad']+$datos['cantidad'];
+						$this->talle->updateTalle($id_producto,$resultado['id_talle'],$cantidad);
+					}
+					else
+					{
+						$datos['id_talle']=$datos['talle'];
+						$datos['id_producto']=$id_producto;
+						unset($datos['talle']);
+						$this->talle->insertTalle($datos);
+					}
+					echo 1;
+				}
+				else
+					echo 2;
+
+			}
+
+			public function eliminar_talle()
+			{
+				$id=$this->input->post("id");
+				$this->load->model("talle","talle",true);
+				if ($this->talle->delete($id))
+					echo 1;
+				else
+					echo 2;
+			}
 
 	
 	}

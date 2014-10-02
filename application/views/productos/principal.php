@@ -29,6 +29,7 @@
                                                 <th>descripcion</th>
                                                 <th>precio</th>
                                                 <th>tipo</th>
+                                                <th>Talles</th>
                                                 <th>Editar</th>
                                                 <th>Eliminar</th>
                                             </tr>
@@ -40,6 +41,7 @@
                                                     <td><?=$value['descripcion']?></td>
                                                     <td><?=$value['precio']?></td>
                                                     <td><?=$value['tipo']?></td>
+                                                    <td><a href="<?=site_url($modulo_nombre.'/talles/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Talles </button> </a> </td>
                                                     <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
                                                     <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                             <?endforeach;?>
@@ -50,6 +52,7 @@
                                                 <th>descripcion</th>
                                                 <th>precio</th>
                                                 <th>tipo</th>
+                                                <th>Talles</th>
                                                 <th>Editar</th>
                                                 <th>Eliminar</th>
                                             </tr>

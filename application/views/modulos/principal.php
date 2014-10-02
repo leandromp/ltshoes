@@ -39,6 +39,7 @@
                                                     <td><?=$value['nombre']?></td>
                                                     <td><?=$value['ruta']?></td>
                                                     <td><?=$value['icono']?></td>
+                                                    
                                                     <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
                                                     <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                             <?endforeach;?>
