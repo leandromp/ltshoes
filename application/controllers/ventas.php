@@ -72,6 +72,9 @@
 					 		$this->load->model("producto","producto",true);
 					 		//cargo el listado de productos
 				 			$variables['productos']=$this->producto->listado();
+				 			foreach ($variables['productos'] as $key => $value) {
+				 				$variables['productos'][$key]['talles']=$this->producto->getTalles($value['id']);
+				 			}
 					 		$variables['vista']='carrito-inc';	
 						}
 						/*else
