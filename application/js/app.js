@@ -26,13 +26,25 @@ function cambiar_perfil()
 
 function agregar_producto_carrito(id)
 {
-	alert(id);
+	//alert(id);
 	//var cantidad="#cantidad-"+id;
 	var cantidad=$("#cantidad-"+id).val();
 	//alert(cantidad);
+	$("#btn-agregar").hide();
 	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad},function(data){
-
-	});
+		switch(data.res)
+		{
+			case 1:
+				$("#btn-agregar").show();
+				$('#cantidad-'+id).val('');
+				$("#cantidad-productos").html(data.cantidad)
+				break
+			case 2:
+				$("#btn-agregar").show();
+				alert('las cantidad no pueden ser menores o iguales a 0');
+				break;
+		}
+	},'json');
 }
 
 function agregar_talle(producto_id,i)

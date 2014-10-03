@@ -1,6 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
 	class Talle extends CI_Model {
+
+		public function getTalles($id)
+		{
+			$sql="SELECT * FROM relacion_talle rt 
+			INNER JOIN talles on rt.id_talle=t.id
+			WHERE rt.id_producto=".$id;
+			$query=$this->db->query($sql);
+			$resultado=$query->result_array();
+			if (count($resultado)>0)
+				return $resultado;
+			else
+				return false;
+		}
 	
 		public function getTalleId($id_producto,$talle)
 		{

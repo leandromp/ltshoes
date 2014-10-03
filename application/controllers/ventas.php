@@ -142,23 +142,31 @@
 							$productos[]=$producto;
 							
 						}
+
 						$carrito['productos']=$productos;//actualizo el carrito 
 						$this->session->set_userdata('carrito',$carrito);
 
-						print_r($carrito);
-						echo 1;
+						//print_r($carrito);
+						
+						$res['cantidad']=count($productos);
+						$res['res']=1;
 
 					}
 				else
-					echo 2; //la cantidad no es mayor 0
+					$res['res']=2; //la cantidad no es mayor 0
 			}
 			else
-			echo 3; // no selecciono ningun producto 
+			$res['res']=3; // no selecciono ningun producto 
 
+		echo json_encode($res);
 		}
 
-	
-	}
+		public function ver_carrito()	
+		{
+			$this->load->view("carrito/index");
+		}
+
+}
 	
 	/* End of file ventas.php */
 	/* Location: ./application/controllers/ventas.php */
