@@ -68,7 +68,11 @@
 						{
 							//cargo la vista para selecionar el cliente
 							$this->load->model("cliente","cliente",true);
-					 		$variables['clientes']=$this->cliente->getClienteId($id);
+							$carrito=$this->session->userdata("carrito");
+					 		$carrito['cliente']=$this->cliente->getClienteId($id);
+					 		$this->session->set_userdata("carrito",$carrito);
+
+					 		$variables['cliente']=$carrito['cliente'];
 					 		$this->load->model("producto","producto",true);
 					 		//cargo el listado de productos
 				 			$variables['productos']=$this->producto->listado();
@@ -77,11 +81,11 @@
 				 			}
 					 		$variables['vista']='carrito-inc';	
 						}
-						/*else
+						else
 						{
 							$variables['vista']="cliente-inc";
 							$variables['mensaje']="no se selecciono ningun cliente";
-						}*/
+						}
 
 						
 
@@ -97,6 +101,7 @@
 		{
 			$id=$this->input->post("id");
 			$cantidad = $this->input->post("cantidad");
+			$talle = $this->input->post("talle");
 			if($id>0)
 			{
 				if($cantidad>0)
@@ -105,7 +110,7 @@
 						$this->load->model("producto","producto",true);
 						$producto = $this->producto->getProductoId($id);
 						$carrito = $this->session->userdata("carrito");
-						if($carrito)
+						if(isset($carrito['productos']))
 						{
 							$update_cantidad=0;
 							//Recorro el carro para saber si tengo que hacer un update de la cantidad
@@ -126,6 +131,7 @@
 								$producto["descripcion"] = $producto["descripcion"];
 								$producto["precio"] = $producto["precio"];
 								$producto["cantidad"] = $cantidad;
+								$producto["talle"] = $talle;
 								$productos[]=$producto;//agrego el producto al array
 								
 								//$this->session->set_userdata('carrito',$carrito);//actualizo la sesion
@@ -139,6 +145,7 @@
 							$producto["descripcion"] = $producto["descripcion"];
 							$producto["precio"] = $producto["precio"];
 							$producto["cantidad"] = $cantidad;
+							$producto["talle"] = $talle;
 							$productos[]=$producto;
 							
 						}
@@ -161,9 +168,158 @@
 		echo json_encode($res);
 		}
 
+		public function eliminar_producto_carrito()
+		{	
+			$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+			 		if ($permisos['baja']==1)
+			 		{
+			 			$id = $this->input->post("id");
+			 			if($id>0)
+			 			{
+			 				$carrito = $this->session->userdata("carrito");
+			 				foreach ($carrito['productos'] as $key => $value) {
+			 					if ($id == $value['id'])
+			 					{
+			 						unset($carrito['productos'][$key]);
+
+			 					}
+			 				}
+			 				$this->session->set_userdata("carrito",$carrito);
+			 				$res['cantidad']=count($productos);
+							$res['res']=1;
+			 			}
+			 			else
+			 			$res['res']=2; // no ha seleccionado ningun productos
+			 		}
+			 		else
+			 		$res['res']=3; // no tiene permisos suficientes para realizar la operacion
+			 		echo json_encode($res);
+			 	}
+			 	else
+			 		header('location:'.site_url());
+		}
+
 		public function ver_carrito()	
 		{
-			$this->load->view("carrito/index");
+				$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+					$this->load->library('menu');
+			 		$variables['menu'] = $this->menu->dame_menu();
+			 		if ($permisos['consulta']==1)
+			 		{
+			 			$variables['carrito']=$this->session->userdata("carrito");
+						$this->load->view("carrito/index",$variables);
+					}
+					else
+						$mensaje="no tiene permisos para ver este modulo";
+				}
+		}
+
+		public function confirmar_compra()
+		{
+
+			$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+					
+			 		if ($permisos['alta']==1)
+			 		{
+						$this->session->userdata("carrito");
+						$variables['carrito'] = $this->session->userdata("carrito");
+						//guardo la venta en 
+						$fecha  = date("m-d-Y");
+					}
+					else
+						$variables['mensaje']="No tiene permisos parar acceder hasta modulo";
+						$variables['vista']="confirmar-compra-inc";
+
+
+					$this->index($variables);
+				}
+				else
+					header('location:'.site_url());
+
+		}
+
+		public function guardar_compra()
+		{
+			$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+					
+			 		if ($permisos['alta']==1)
+			 		{
+			 			$opcion_pago=$this->input->post("opcion-pago");
+						
+						if ($opcion_pago!="")
+						{
+
+							$total_compra=0;
+							$carrito=$this->session->userdata("carrito");
+							$this->load->model("venta","venta",true);
+							//  calculo el total de la compra 
+							foreach ($carrito['productos'] as $key => $value) {
+								$total_compra+=$value['precio']*$value['cantidad'];
+							}
+							$datos_venta['fecha'] = $fecha=date("Y-m-d");
+							$datos_venta['monto'] = $total_compra;
+							if ($id_venta=$this->venta->insertVenta($datos_venta))
+								{
+									$id_venta;
+									//guardo el detalle de la lineas de venta
+									foreach ($carrito['productos'] as $key => $value) 
+									{
+										$datos_lv['id_producto'] = $value ['id'];
+										$datos_lv['cantidad'] = $value['cantidad'];
+										$datos_lv['precio'] = $value['precio'];
+										$datos_lv['id_venta'] = $id_venta;
+										$this->venta->insertLVenta($datos_lv);
+									}
+								}
+							else
+								$variables['mensaje']="no se pudo realizar la operacion solicitada. Comuniquese con el Administrador";
+							//control si ademas de guardar la venta tambien voy a realizar el alta de  plan de pago
+							if($opcion_pago>0)
+							{
+								$variables['opcion_pago']=$opcion_pago;
+								$variables['id_venta']=$id_venta;
+								$variables['vista']='seleccion-pago';
+								$cliente=$this->session->userdata("carrito");
+								$variables['cliente'] = $cliente['cliente'];
+								$variables['total_compra'] = $total_compra;
+								$variables['opciones_pago']=$this->venta->getPPagos();
+								$this->index($variables);
+							}
+							else
+								header('location:'.site_url());
+								
+						}
+						//else
+						
+						
+					}
+					//else //no tiene permisos para la operacion sobre el modulo
+
+
+					//$this->index($variables);
+				}
+				else
+					header('location:'.site_url());
+
 		}
 
 }

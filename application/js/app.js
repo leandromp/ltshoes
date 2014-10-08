@@ -23,15 +23,15 @@ function cambiar_perfil()
 		$("#cuerpo").html(data);
 	});
 }
-
+/***************************** FUNCIONES PARA EL CARRITO DE COMPRA ************************************************/
 function agregar_producto_carrito(id)
 {
 	//alert(id);
 	//var cantidad="#cantidad-"+id;
 	var cantidad=$("#cantidad-"+id).val();
-	//alert(cantidad);
+	var talle=$("#talle-"+id).val();
 	$("#btn-agregar").hide();
-	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad},function(data){
+	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad,talle:talle},function(data){
 		switch(data.res)
 		{
 			case 1:
@@ -46,6 +46,24 @@ function agregar_producto_carrito(id)
 		}
 	},'json');
 }
+
+function eliminar_producto_carrito(id)
+{
+	$.post(URL_BASE+'ventas/eliminar_producto_carrito',{id:id},function(data){
+		switch (data.res)
+		{
+			case 1: 
+				$("#example1").load();
+				break;
+			default:
+				alert('ocurrio un problema');
+		}
+	},'json');
+}
+
+
+/******************************************************************************************************************/
+
 
 function agregar_talle(producto_id,i)
 {
@@ -108,4 +126,10 @@ function guardar_talle(i,id_producto,opcion)
 				break;
 		}
 	});
+}
+
+function cambiar_plan_pago(monto)
+{
+	var opcion_id=("#opcion").val();
+	alert(monto+opcion_id);
 }

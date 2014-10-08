@@ -1,10 +1,9 @@
-<? $total = 0; ?>
- <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
+ <? $total =0; ?>
+ <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                       <?= strtoupper($modulo_nombre=$this->uri->segment(1));?>
+                       CONFIMAR COMPRA 
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -12,26 +11,30 @@
                         <li class="active">Blank page</li>
                     </ol>
                 </section>
-               <!-- Main content -->
+                <!-- Main content -->
                 <section class="content">
-                   <section class="col-md-12">
-                        <div class="col-md-1"><a href="<?=site_url('ventas/seleccionar_cliente/'.$carrito['cliente']['id'])?>"> <button type="button" class="btn btn-success btn-flat"> Agregar Productos </button> </a> </div>                 
-                        <div class="col-md-1 pull-right">
-                            <a href="<?=site_url('ventas/ver_carrito')?>"> 
-                                <button type="button" class="btn btn-app"> 
-                                    <span id="cantidad-productos" class="badge bg-yellow"></span>
-                                    <i class="fa fa-shopping-cart"> </i>Ver Carrito 
-                                </button> 
-                            </a> 
+                <div class="col-md-12">
+                    <div class="box box-solid box-primary">
+                        <div class="box-header"> <i class="fa fa-user"> </i><h4>&nbsp;Datos del cliente </h4>  </div>
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                        <dt>Nombre</dt>
+                                        <dd><?=$carrito['cliente']['nombre']?></dd>
+                                        <dt>Apellido</dt>
+                                        <dd><?=$carrito['cliente']['apellido']?></dd>
+                                        <dt>Direccion</dt>
+                                        <dd><?=$carrito['cliente']['direccion']?></dd>
+                                        <dt>telefono</dt>
+                                        <dd><?=$carrito['cliente']['telefono']?></dd>
+                                    </dl>
                         </div>
-                    </section><br><br><br><br>
-                            <div class="box">
-                                <div class="box-header" id="recargar">
-                                    <div class="col-md-11"> <h3 class="box-title"><?=strtoupper($modulo_nombre);?></h3> </div>
-                                </div><!-- /.box-header -->
-                                <div class="box-body table-responsive">
-                                <? if($carrito): ?>
-                                    <table id="example1" class="table table-bordered table-hover">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="box box-solid box-success"> 
+                        <div class="box-header"><i class="fa fa-money"> </i> <h4>&nbsp; Datos de la Compra </h4> </div>
+                        <div class="box-body"> 
+                            <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Codigo</th>
@@ -40,7 +43,7 @@
                                                 <th>precio</th>
                                                 <th>Cantidad</th>
                                                 <th>Sub Total</th>
-                                                <th> Eliminar </th>
+                                   
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +56,6 @@
                                                     <td><?=$value['cantidad']?></td>
                                                     <td><?=$subtotal=$value['cantidad']*$value['precio']?></td>
                                                     <? $total += $subtotal; ?>
-                                                    <td><button id="btn-agregar" onclick="eliminar_producto_carrito(<?=$value['id']?>);" role="button" class="btn btn-danger"> Eliminar </button> </a> </td>
                                             <?endforeach;?>
                                         </tbody>
                                         <tfoot>
@@ -64,22 +66,26 @@
                                                 <th>precio</th>
                                                 <th>Cantidad</th>
                                                 <th>Sub Total</th>
-                                                <th> Eliminar </th>
+                                   
                                             </tr>
                                             <tr> <th> </th> <th> </th> <th> </th> <th> </th> <th> </th><th> <h4> TOTAL DE LA VENTA: </h4></th>  <th><h4>$ <?=$total?></h4> </th> </tr>
                                         </tfoot> 
                                     </table>
-                                    <? endif; ?>
-                                </div><!-- /.box-body -->
-                                <div class="box-footer" > <a href="<?=site_url('ventas/confirmar_compra');?>" class="btn btn-primary" >Confirmar Compra</a> </div><br>
-                            </div><!-- /.box -->
-                            <? if(isset($mensaje)): ?>
-                                <div id="mensaje" class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
-                            <? endif ?>
-                            <?if(isset($error)): ?>
-                                <div class="alert alert-danger alert-dismissable"> <?=$error?> </div><br>
-                            <?endif?>
+                        </div>
+                     </div>
+                     <div class="box-footer">
+                       
+                            <form action="<?=site_url('ventas/guardar_compra');?>" method="post">
+                            <select name="opcion-pago">
+                                <option value="0"> Solo Guardar </option>
+                                <option value="1"> Plan de pago Mensual </option>
+                                <option value="2"> Plan de pago Quincenal </option>
+                                <option value="3"> Plan de pago Semanal </option>
+                            </select> 
+                            <button class="btn btn-primary" >Confirmar Compra</button>
+              
+                     </div>
+                </div>
                 </section>
-                            
-            </aside><!-- /.right-side -->
-        </div><!-- ./wrapper -->
+
+</aside>
