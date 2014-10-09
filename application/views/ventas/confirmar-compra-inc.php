@@ -74,15 +74,16 @@
                         </div>
                      </div>
                      <div class="box-footer">
-                       
+                            <div class="col-md-2">
                             <form action="<?=site_url('ventas/guardar_compra');?>" method="post">
-                            <select name="opcion-pago">
+                            <select name="opcion-pago" class="form-control">
                                 <option value="0"> Solo Guardar </option>
                                 <option value="1"> Plan de pago Mensual </option>
                                 <option value="2"> Plan de pago Quincenal </option>
                                 <option value="3"> Plan de pago Semanal </option>
                             </select> 
                             <button class="btn btn-primary" >Confirmar Compra</button>
+                            </div>
               
                      </div>
                 </div>

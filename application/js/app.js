@@ -130,6 +130,32 @@ function guardar_talle(i,id_producto,opcion)
 
 function cambiar_plan_pago(monto)
 {
-	var opcion_id=("#opcion").val();
-	alert(monto+opcion_id);
+	var opcion_id=$("#plan-pago").val();
+	var monto_cuota;
+	var cantidad_cuotas;
+
+	switch(opcion_id)
+	{
+		case '1':
+			monto_cuota = cacular_monto_cuotas(monto,16);
+			$("#cantidad-pagos").val(16);
+			$("#monto-cuota").val(monto_cuota);
+		break;
+		case '2':
+			monto_cuota = cacular_monto_cuotas(monto,8);
+			$("#cantidad-pagos").val(8);
+			$("#monto-cuota").val(monto_cuota);
+		break;
+		case '3':
+			monto_cuota = cacular_monto_cuotas(monto,4);
+			$("#cantidad-pagos").val(4);
+			$("#monto-cuota").val(monto_cuota);
+		break;
+	}
+}
+
+function cacular_monto_cuotas(monto,cuotas)
+{
+	var temp=monto/cuotas;
+	return temp;
 }

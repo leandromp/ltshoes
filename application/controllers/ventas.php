@@ -295,6 +295,20 @@
 							//control si ademas de guardar la venta tambien voy a realizar el alta de  plan de pago
 							if($opcion_pago>0)
 							{
+								switch ($opcion_pago) {
+										case '1':
+											$variables['monto_cuota'] = $total_compra/16;
+											$variables['cantidad_cuotas'] = 16;
+											break;
+										case '2':
+											$variables['monto_cuota'] = $total_compra/8;
+											$variables['cantidad_cuotas'] = 8;
+											break;
+										case '3':
+											$variables['monto_cuota'] = $total_compra/4;
+											$variables['cantidad_cuotas'] = 4;
+											break;
+								}
 								$variables['opcion_pago']=$opcion_pago;
 								$variables['id_venta']=$id_venta;
 								$variables['vista']='seleccion-pago';
@@ -302,6 +316,7 @@
 								$variables['cliente'] = $cliente['cliente'];
 								$variables['total_compra'] = $total_compra;
 								$variables['opciones_pago']=$this->venta->getPPagos();
+								//print_r($variables);
 								$this->index($variables);
 							}
 							else
@@ -319,7 +334,33 @@
 				}
 				else
 					header('location:'.site_url());
+		}
 
+		public function guardar_opcion_pago() //este metodo deberia ir en el controlador ccorriente ?
+		{
+			$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+					
+			 		if ($permisos['alta']==1)
+			 		{
+			 			$datos[] = $this->input->post("");
+			 			$datos[] = $this->input->post("");
+			 			$datos[] = $this->input->post("");
+			 			$datos[] = $this->input->post("");
+			 			$datos[] = $this->input->post("");
+			 			$datos[] = $this->input->post("");
+			 			$this->load->model("venta","venta",TRUE);
+			 			$this->venta->insertOPago();
+			 		}
+			 		else
+			 		$variables['error'] = "no tiene permisos para realizar la accion";
+			 }
+			 else
+			 	header('location:'.site_url());
 		}
 
 }

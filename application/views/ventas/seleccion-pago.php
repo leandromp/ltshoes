@@ -16,7 +16,7 @@
     
      <div class="col-md-12">
                     <div class="box box-primary">
-                    <form role="form" method="post" action="" id="clientes-form">
+                    <form role="form" method="post" action="<?=site_url('ventas/guardar_opcion_pago')?>" id="clientes-form">
                        <div class="box-header">
                        <h3 class="box-title">Venta Nº <?=$id_venta?></h3> 
                        </div>
@@ -28,33 +28,34 @@
                            </div> 
                            <div class="col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Cliente</label>
-                                <input id="nombre" class="form-control" type="text" name="nombre" value="<? if(isset($cliente)) echo $cliente['nombre'].' '.$cliente['apellido'];?>" >
+                                <input id="nombre" class="form-control" readonly type="text" name="nombre" value="<? if(isset($cliente)) echo $cliente['nombre'].' '.$cliente['apellido'];?>" >
                             </div>
 
                             <div class="col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Total de la Compra</label>
-                                <input id="monto_total" class="form-control" type="text" name="monto_total" value="<?=$total_compra?>" >
+                                <input id="monto_total" readonly class="form-control" type="text" name="monto_total" value="<?=$total_compra?>" >
                             </div>
 
                             <div class=" col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Opcion de pago</label>
-                                <select id="opcion" onchange="cambiar_plan_pago(<?=$total_compra?>)" class="form-control">
+                                <select id="plan-pago" onchange="cambiar_plan_pago(<?=$total_compra?>)" class="form-control">
 	                                <? foreach ($opciones_pago as $key => $value): ?>
-	                                <option value="<?=$value['valor']?>"> <?=$value['nombre']?> </option>
+	                                <? if($value['valor']==$opcion_pago)$selected="selected"; else $selected=""; ?>
+	                                <option <?=$selected?> value="<?=$value['valor']?>"> <?=$value['nombre']?> </option>
 	                                <? endforeach; ?>
                                 </select>
                             </div>                    
                             <div class=" col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Cantidad de Pagos</label>
-                                <input id="dni" class="form-control" type="text" name="dni" value="<??>" >
+                                <input id="cantidad-pagos" class="form-control" type="text" name="cantidad-pagos" value="<?if(isset($cantidad_cuotas)) echo $cantidad_cuotas;?>" >
                             </div>  
                             <div class=" col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Monto de cada Cuota</label>
-                                <input id="dni" class="form-control" type="text" name="dni" value="<??>" >
+                                <input id="monto-cuota" class="form-control" type="text" name="monto-cuota" value="<?if(isset($monto_cuota)) echo $monto_cuota;?>" >
                             </div>  
                         </div>
                        <div class="box-footer">
-                      <button class="btn btn-primary"  type="submit">Enviar</button> 
+                      <button class="btn btn-primary" type="submit">Terminar Venta</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
                       </div>
                             <? if(isset($mensaje)): ?>
