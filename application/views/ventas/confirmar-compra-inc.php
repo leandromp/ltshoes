@@ -18,6 +18,8 @@
                         <div class="box-header"> <i class="fa fa-user"> </i><h4>&nbsp;Datos del cliente </h4>  </div>
                         <div class="box-body">
                             <dl class="dl-horizontal">
+                                        <dt>Numero de Cliente</dt>
+                                        <dd><?=$carrito['cliente']['id']?></dd>
                                         <dt>Nombre</dt>
                                         <dd><?=$carrito['cliente']['nombre']?></dd>
                                         <dt>Apellido</dt>

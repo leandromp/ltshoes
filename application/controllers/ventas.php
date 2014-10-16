@@ -189,7 +189,7 @@
 			 					}
 			 				}
 			 				$this->session->set_userdata("carrito",$carrito);
-			 				$res['cantidad']=count($productos);
+			 				$res['cantidad']=count($carrito['productos']);
 							$res['res']=1;
 			 			}
 			 			else
@@ -277,6 +277,7 @@
 							}
 							$datos_venta['fecha'] = $fecha=date("Y-m-d");
 							$datos_venta['monto'] = $total_compra;
+							$datos_venta['id_cliente'] = $carrito['cliente']['id'];
 							if ($id_venta=$this->venta->insertVenta($datos_venta))
 								{
 									$id_venta;
@@ -320,7 +321,7 @@
 								$this->index($variables);
 							}
 							else
-								header('location:'.site_url());
+								header('location:'.site_url('ventas'));
 								
 						}
 						//else
@@ -347,14 +348,87 @@
 					
 			 		if ($permisos['alta']==1)
 			 		{
-			 			$datos[] = $this->input->post("");
-			 			$datos[] = $this->input->post("");
-			 			$datos[] = $this->input->post("");
-			 			$datos[] = $this->input->post("");
-			 			$datos[] = $this->input->post("");
-			 			$datos[] = $this->input->post("");
+			 			$this->load->model("ccorriente","ccorriente",TRUE);
 			 			$this->load->model("venta","venta",TRUE);
-			 			$this->venta->insertOPago();
+
+			 			$datos['id_venta'] = $this->input->post("id_venta");
+			 			$datos['id_cliente'] = $this->input->post("id_cliente");
+			 			//obtengo los datos del id de cuenta corriente del cliente 
+			 			$cuenta_datos = $this->ccorriente->getCCorrienteId($datos['id_cliente']);
+			 			
+			 			if ($cuenta_datos)
+			 			{
+			 				$datos['id_cuenta_corriente'] = $cuenta_datos['id'];
+			 				$datos['debe']= $cuenta_datos['debe'];
+			 			}
+			 			else
+			 			{
+			 				$datos_cc['id_cliente'] = $datos['id_cliente'];
+			 				$datos_cc['debe']= 0;
+			 				$last_id = $this->ccorriente->insertBlank($datos_cc);
+			 				$datos['id_cuenta_corriente'] = $last_id;
+			 				// armo los datos para insertar en la tabla plan pago
+			 				$datos['debe'] = 0;
+			 			}
+
+			 				//hago una actulizacion de la cuenta corriente del cliente
+			 				$datos['debe'] += $this->input->post("monto_total");
+			 				if($this->ccorriente->update($datos['id_cliente'],"debe",$datos['debe']))
+			 				{
+			 					//si hubo exito al hacer el UPdate en la C Corriente hago los respectivos
+			 					//insert en las tablas plan pago y detalle plan pago
+			 					$datos_pp['tipo']= $this->input->post("plan-pago");
+			 					$datos_pp['monto_total'] = $this->input->post("monto_total");
+			 					$datos_pp['monto_cuota'] = $this->input->post("monto-cuota");
+			 					$datos_pp['id_cuenta_corriente'] = $cuenta_datos['id'];
+			 					$datos_pp['id_venta'] = $datos['id_venta'];
+			 					//inserto el plan de pago
+			 					$id_plan_pago = $this->ccorriente->insertPlanPago($datos_pp);
+			 					$cantidad_cuotas=$this->input->post("cantidad-pagos");
+			 					//inserto los detalles de plan de pago 
+			 					$datos_dp['monto']=$this->input->post("monto-cuota");
+			 					$datos_dp['fecha_vencimiento']=date('Y-m-d');
+			 					$datos_dp['plan_pago_id'] = $id_plan_pago;
+			 					
+			 					$dias_s=0;
+			 					$mes_s=0;
+			 					for ($i=1; $i <=$cantidad_cuotas  ; $i++)
+			 					{
+
+			 						switch($datos_pp['tipo'])
+			 						{
+			 							case 3:
+			 							$dias=0;
+			 							$mes=1;
+			 							break;
+			 							case 2:
+			 							$dias=15;
+			 							$mes=0;
+			 							break;
+			 							case 1:
+			 							$dias=7;
+			 							$mes=0;
+			 							break;
+			 						}
+			 						$this->ccorriente->insertLineaPlanPago($datos_dp);	
+			 						///calculo la siguiente fecha de vencimiento.
+			 						$dias_s+=$dias;
+			 						$mes_s+=$mes;
+			 						$fecha = mktime(0,0,0,date('m')+$mes_s,date('d')+$dias_s, date('y'));
+			 						$datos_dp['fecha_vencimiento']=date('Y-m-d',$fecha);
+
+			 					}
+			 					
+
+						 			$variables['mensaje'] = "Plan de pago y Venta guardados con exito";			
+			 				}
+			 				else
+			 					$variables['error']="No tiene conexion con la db comunique al Administrador";
+
+			 			
+			 			$this->index($variables);
+			 		
+			 			//$this->venta->insertOPago();
 			 		}
 			 		else
 			 		$variables['error'] = "no tiene permisos para realizar la accion";

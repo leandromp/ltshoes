@@ -3,8 +3,10 @@
 	class Venta extends CI_Model {
 	
 			public function listado()
-			{
-				$query=$this->db->get("venta");
+			{	
+				$sql="SELECT * FROM venta v
+					INNER JOIN cliente c ON v.id_cliente=c.id ";
+				$query=$this->db->query($sql);
 				$resultado=$query->result_array();
 				return $resultado;
 			}

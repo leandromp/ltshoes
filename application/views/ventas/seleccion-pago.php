@@ -23,12 +23,16 @@
                      
                        <div class="box-body">
                            <div class="col-xs-6 form-group">
-                           		 <label for="exampleInputEmail1">Venta Numero</label>
-                                <input id="id_venta" readonly class="form-control" name="id_venta"  value="<? if(isset($id_venta)) echo $id_venta;?>" >
+                                <input type="hidden" id="id_venta" readonly class="form-control" name="id_venta"  value="<? if(isset($id_venta)) echo $id_venta;?>" >
                            </div> 
                            <div class="col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Cliente</label>
                                 <input id="nombre" class="form-control" readonly type="text" name="nombre" value="<? if(isset($cliente)) echo $cliente['nombre'].' '.$cliente['apellido'];?>" >
+                            </div>
+
+                             <div class="col-xs-6 form-group">
+                                <label for="exampleInputEmail1">Cliente</label>
+                                <input id="id_cliente" class="form-control" readonly type="text" name="id_cliente" value="<? if(isset($cliente)) echo $cliente['id'];?>" >
                             </div>
 
                             <div class="col-xs-6 form-group">
@@ -38,7 +42,7 @@
 
                             <div class=" col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Opcion de pago</label>
-                                <select id="plan-pago" onchange="cambiar_plan_pago(<?=$total_compra?>)" class="form-control">
+                                <select name="plan-pago" id="plan-pago" onchange="cambiar_plan_pago(<?=$total_compra?>)" class="form-control">
 	                                <? foreach ($opciones_pago as $key => $value): ?>
 	                                <? if($value['valor']==$opcion_pago)$selected="selected"; else $selected=""; ?>
 	                                <option <?=$selected?> value="<?=$value['valor']?>"> <?=$value['nombre']?> </option>

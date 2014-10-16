@@ -159,3 +159,10 @@ function cacular_monto_cuotas(monto,cuotas)
 	var temp=monto/cuotas;
 	return temp;
 }
+
+/*************************************************************************************************/
+
+function cancelar_pago(id)
+{
+	alert(id);
+}

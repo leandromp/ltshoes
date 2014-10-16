@@ -23,7 +23,7 @@
 
 		}
 
-		public function insertEmpty($id)
+		//public function insertEmpty($id)
 	
 	}
 	

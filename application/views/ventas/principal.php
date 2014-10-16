@@ -21,7 +21,7 @@
                                     <div class="col-md-11"> <h3 class="box-title"><?=strtoupper($modulo_nombre);?></h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                <? if($clientes): ?>
+                                <? if($ventas): ?>
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -29,18 +29,19 @@
                                                 <th>Apellido</th>
                                                 <th>Documento</th>
                                                 <th>Telefono</th>
-                                                <th>Editar</th>
+                                                
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <?foreach ($clientes as $key => $value) :?>
+                                           <?foreach ($ventas as $key => $value) :?>
                                                 <tr>
-                                                    <td><?=$value['nombre']?></td>
-                                                    <td><?=$value['apellido']?></td>
-                                                    <td><?=$value['dni']?></td>
+                                                    <? $temp = explode('-',$value['fecha']); ?>
+                                                    <td><?=$temp[2].'/'.$temp[1].'/'.$temp[0]?></td>
+                                                    <td><?=$value['monto']?></td>
+                                                    <td><?=$value['nombre'].''.$value['apellido']?></td>
                                                     <td><?=$value['telefono']?></td>
-                                                    <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
+                                                    
                                                     <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                             <?endforeach;?>
                                         </tbody>
@@ -50,13 +51,21 @@
                                                 <th>Apellido</th>
                                                 <th>Documento</th>
                                                 <th>Telefono</th>
-                                                <th>Editar</th>
+                                                
                                                 <th>Eliminar</th>
                                             </tr>
                                         </tfoot>
                                     </table>
                                     <? endif; ?>
                                 </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                <? if(isset($mensaje)): ?>
+                                <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
+                                <? endif ?>
+                                <?if(isset($error)): ?>
+                                    <div class="alert alert-danger alert-dismissable"> <?=$error?> </div><br>
+                                <?endif?>
+                                <div>
                             </div><!-- /.box -->
                     
                 </section>
