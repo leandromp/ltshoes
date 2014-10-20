@@ -2,6 +2,20 @@
 	
 	class Empleado extends CI_Model {
 		
+		public function getEmpleados($perfil_id=0)
+		{	
+			if($perfil_id!=0)
+				$this->db->where("perfil_id",$perfil_id);
+
+			$query=$this->db->get("empleado");
+			$resultado=$query->result_array();
+			if(count($resultado)>0)
+				return $resultado;
+			else
+				return false;
+
+		}
+
 		public function comprobarLogeo($nombre,$password)
 		{
 			$query=$this->db->get_where('empleado',array('nombre'=>$nombre,'password'=>$password));

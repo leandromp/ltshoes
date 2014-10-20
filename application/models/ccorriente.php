@@ -57,6 +57,16 @@
 					return false;
 			}
 
+			public function getPlaneId($id_ccorriente)
+			{
+				$query=$this->db->get_where("plan_pago",array("id_cuenta_corriente" => $id_ccorriente));
+				$resultado = $query->result_array();
+				if (count($resultado)>0)
+					return $resultado;
+				else
+					return false;
+			}
+
 			public function getDetalleID($id_plan_pago)
 			{
 				$query=$this->db->get_where("detalle_plan_pago",array("plan_pago_id" => $id_plan_pago));
@@ -65,6 +75,15 @@
 					return $resultado;
 				else
 					return false;
+			}
+
+			public function updateDetallePlan($id,$datos)
+			{
+				$this->db->where("id",$id);
+				if($this->db->update("detalle_plan_pago",$datos))
+					return TRUE;
+				else
+					return FALSE;
 			}
 
 

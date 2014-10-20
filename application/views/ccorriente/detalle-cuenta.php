@@ -30,21 +30,14 @@
                                 <div class="box-header" data-toggle="tooltip" title="Header tooltip">
                                     <h3 class="box-title">Opcion de Pago Nº <?=$value['id']?></h3>
                                     <div class="box-tools pull-right">
-                                        <button class="btn btn-success btn-xs" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <a href="<?=site_url('ccorrientes/ver_detalle_plan/'.$value['id'].'/'.$cliente['id']);?>" class="btn btn-success"><i class="fa fa-arrow-right"></i></a>
                                         
                                     </div>
                                 </div>
-                                <div class="box-body" style="display:none">
-                                    <table class="table table-condensed">
+                               
+                                
 
-                                        <tr>
-                                            <th style="width: 20px">Monto</th>
-                                            <th style="width: 200px">Fecha de Vencimiento</th>
-                                            <th>Fecha de Pago</th>
-                                            <th>Cancelar</th>
-                                        </tr>
-
-                                    <?php foreach ($value['detalle_pp'] as $k => $v): ?>                             
+                                    <?php /*foreach ($value['detalle_pp'] as $k => $v): ?>                             
                                         <tr>
                                             <td> <?=$v['monto']?> </td>
                                             <td> <?=$v['fecha_vencimiento']?> </td>
@@ -53,9 +46,9 @@
                                         </tr>
                                     
                                     
-                                   <?php endforeach ?>
-                                </div><!-- /.box-body -->
-                                </table>
+                                   <?php endforeach */?>
+                          
+                                
                             </div><!-- /.box -->
                        
                         <?endforeach;?>

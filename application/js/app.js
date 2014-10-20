@@ -164,5 +164,28 @@ function cacular_monto_cuotas(monto,cuotas)
 
 function cancelar_pago(id)
 {
-	alert(id);
+	var fecha = $("#fecha"+id).val();
+	var monto = $("#monto"+id).val();
+	$.post(URL_BASE+'ccorrientes/cancelar_pago',{id:id,monto:monto,fecha:fecha},function(data){
+		switch (data.res)
+		{
+			case '1':
+				$("#exito").append('Se guardaron los datos con exito');
+				$("#exito").show();
+				setTimeout(function(){
+				$("#exito").hide();
+				location.reload();
+				},5000);
+				
+			break;
+			case '2':
+				$("#mensaje").append('No se puede enviar ningun campo vacio, intentelo de nuevo');
+				$("#mensaje").show();
+			setTimeout(function(){
+				$("#mensaje").hide();
+			},3000);
+			break;
+		}
+			
+	},'json');
 }

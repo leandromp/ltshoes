@@ -8,8 +8,6 @@
 				$user=$this->session->userdata("ltshoes");
 				if ($user['usuario_id']>0)
 				{
-					
-					
 					$this->load->model("empleado","empleado",true);
 					$permisos=$this->empleado->getPermisos($user['usuario_id'],30);
 					$this->load->library('menu');
@@ -21,8 +19,8 @@
 				 		$variables['clientes']=$this->cliente->getClientes();
 				 		$this->load->view('ccorriente/index',$variables);
 			 		}
-			 		else
-			 			header('location:'.site_url());
+			 		//else
+			 			//header('location:'.site_url());
 			 		
 				}	
 			}
@@ -45,10 +43,7 @@
 			 			$variables['cliente']=$this->cliente->getClienteId($id);
 			 			$variables['ccorriente'] = $this->ccorriente->getCCorrienteId($id);
 			 			$variables['planes'] = $this->ccorriente->getPlanesId($variables['ccorriente']['id']);
-			 			foreach ($variables['planes'] as $key => $value) {
-
-			 					$variables['planes'][$key]['detalle_pp']=$this->ccorriente->getDetalleID($value['id']);
-			 			}
+			 			
 			 			$variables['vista']="detalle-cuenta";
 			 			$this->index($variables);
 			 		}
@@ -56,6 +51,58 @@
 			 			header('location:'.site_url());
 				}
 
+			}
+
+			public function ver_detalle_plan($id_plan,$id_cliente)
+			{
+				$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],30);
+					$this->load->library('menu');
+			 		$variables['menu'] = $this->menu->dame_menu();
+			 		if ($permisos['consulta']==1)
+			 		{
+			 			$this->load->model("empleado","empleado",TRUE);
+			 			$this->load->model("ccorriente","ccorriente",TRUE);
+
+			 			$variables['id_cliente']=$id_cliente;
+			 			$variables['empleados']=$this->empleado->getEmpleados(0);
+			 			$variables['detalle_pp']=$this->ccorriente->getDetalleID($id_plan);
+			 			$variables['vista']="detalle-plan-pago";
+			 		}
+			 		else
+			 			$variables['mensaje']="No tiene permisos para acceder a esta funcion";
+
+			 		$this->index($variables);
+				}
+					else
+					header('location:'.site_url());
+
+			}
+
+			public function cancelar_pago()
+			{
+				$fecha = $this->input->post("fecha");
+				$fecha_temp=explode("/", $fecha);
+				$datos['fecha_pago']=$fecha_temp[2].'-'.$fecha_temp[1].'/'.$fecha_temp[0];
+				$datos['monto_pago'] = $this->input->post("monto");
+				$id = $this->input->post("id");
+				if ($id and $datos['fecha_pago'] and $datos['monto_pago'])
+				{
+					$this->load->model('ccorriente','ccorriente',TRUE);
+					// primero hago update el pago en la tabla detalle_plan_pago
+					if($this->ccorriente->updateDetallePlan($id,$datos))
+						//$this->ccorriente
+						$res['res']='1';
+					else
+						$res['res']='3';
+				}
+				else
+					$res['res']='2';
+
+				echo json_encode($res);
 			}
 		
 	}
