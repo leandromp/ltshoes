@@ -42,7 +42,7 @@
 			</section>
 
 			<?php
-				$select="<select class=\"form-control\">";
+				$select="<select id=\"empleado\" class=\"form-control\">";
 				foreach ($empleados as $key => $value) {
 					$select.="<option value=".$value['id']."> ".$value['nombre']." </option>";
 				}

@@ -1,4 +1,11 @@
- <? $total =0; ?>
+ <?php  
+        $total =0;
+        $select="<select id=\"empleado\" class=\"form-control\">";
+        foreach ($empleados as $key => $value) {
+            $select.="<option value=".$value['id']."> ".$value['nombre']." </option>";
+        }
+        $select.="</select>";
+?>
  <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
@@ -78,12 +85,15 @@
                      <div class="box-footer">
                             <div class="col-md-2">
                             <form action="<?=site_url('ventas/guardar_compra');?>" method="post">
+                            <label> Seleccione el Metodo de pago </label>
                             <select name="opcion-pago" class="form-control">
                                 <option value="0"> Solo Guardar </option>
                                 <option value="1"> Plan de pago Mensual </option>
                                 <option value="2"> Plan de pago Quincenal </option>
                                 <option value="3"> Plan de pago Semanal </option>
                             </select> 
+                            <label> Seleccione el vendedor </label>
+                            <?= $select;?>
                             <button class="btn btn-primary" >Confirmar Compra</button>
                             </div>
               

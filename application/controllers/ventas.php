@@ -236,12 +236,16 @@
 			 		if ($permisos['alta']==1)
 			 		{
 						$this->session->userdata("carrito");
+						$this->load->model("empleado","empleado",TRUE);
 						$variables['carrito'] = $this->session->userdata("carrito");
 						//guardo la venta en 
-						$fecha  = date("m-d-Y");
+						//$fecha  = date("m-d-Y");
+						$variables['empleados'] = $this->empleado->getEmpleados();
 					}
 					else
 						$variables['mensaje']="No tiene permisos parar acceder hasta modulo";
+
+
 						$variables['vista']="confirmar-compra-inc";
 
 

@@ -164,9 +164,11 @@ function cacular_monto_cuotas(monto,cuotas)
 
 function cancelar_pago(id)
 {
+	/* falta actualizar la cuenta corriente */
 	var fecha = $("#fecha"+id).val();
 	var monto = $("#monto"+id).val();
-	$.post(URL_BASE+'ccorrientes/cancelar_pago',{id:id,monto:monto,fecha:fecha},function(data){
+	var id_empleado = $("#empleado").val();
+	$.post(URL_BASE+'ccorrientes/cancelar_pago',{id:id,monto:monto,fecha:fecha,id_empleado:id_empleado},function(data){
 		switch (data.res)
 		{
 			case '1':
@@ -189,3 +191,4 @@ function cancelar_pago(id)
 			
 	},'json');
 }
+

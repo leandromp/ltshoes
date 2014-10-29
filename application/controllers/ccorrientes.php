@@ -88,14 +88,29 @@
 				$fecha_temp=explode("/", $fecha);
 				$datos['fecha_pago']=$fecha_temp[2].'-'.$fecha_temp[1].'/'.$fecha_temp[0];
 				$datos['monto_pago'] = $this->input->post("monto");
+				$datos['id_empleado'] = $this->input->post("id_empleado");
 				$id = $this->input->post("id");
 				if ($id and $datos['fecha_pago'] and $datos['monto_pago'])
 				{
 					$this->load->model('ccorriente','ccorriente',TRUE);
 					// primero hago update el pago en la tabla detalle_plan_pago
 					if($this->ccorriente->updateDetallePlan($id,$datos))
-						//$this->ccorriente
+					{
+						$plan_pago_id=$this->ccorriente->getPlanId($id);
+						$cuenta_corriente_id=$this->ccorriente->getCCorrientebyId($plan_pago_id);
+						// traigo todos los datos de la cuenta corriente
+						$datos_cuenta= $this->ccorriente->getDetalleCuenta($cuenta_corriente_id);
+						foreach ($datos_cuenta as $key => $value) {
+							$value['haber']+=$datos['monto_pago'];
+							$saldo=$value['debe']-$value['haber'];
+							$datos_cuenta_c['haber'] = $value['haber'];
+							$datos_cuenta_c['saldo'] = $saldo;
+						}
+						
+						$this->ccorriente->updateCuenta($cuenta_corriente_id,$datos_cuenta_c);
 						$res['res']='1';
+					}
+						
 					else
 						$res['res']='3';
 				}
