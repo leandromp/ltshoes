@@ -27,7 +27,7 @@ class Modulos extends CI_Controller
 					//cargo todos los perfiles para hacer un insert por cada uno en la tabla 
 					//permisos pero con los campos en 0
 					$this->load->model("permiso","permiso",true);
-					echo $perfiles=$this->permiso->getPerfiles();
+					$perfiles=$this->permiso->getPerfiles();
 					foreach ($perfiles as $key => $value) 
 					{
 						if ($this->permiso->insertEmpty($modulo_id,$value['id']))
@@ -147,7 +147,7 @@ class Modulos extends CI_Controller
 						 			
 							 	}
 							 $variables['perfiles']=$perfiles;
-							 $variables['permisos']=$this->modulo->listado($user['usuario_id']);;
+							 $variables['permisos']=$this->modulo->listado($user['perfil_id']);;
 						}
 					}
 					else

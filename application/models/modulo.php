@@ -13,14 +13,14 @@
 			else
 				return false;
 		}
-		public function listado($usuario_id=0)
+		public function listado($perfil_id=0)
 		{
-			if($usuario_id==0)
-				$usuario_id=$this->input->post("perfil");
+			if($perfil_id==0)
+				$perfil_id=$this->input->post("perfil");
 
 			$sql="SELECT m.nombre, p.* FROM modulo m
 			 	   LEFT JOIN permiso p on m.id=p.modulo_id
-			 	   WHERE usuario_id=".$usuario_id;
+			 	   WHERE perfil_id=".$perfil_id;
 			$query = $this->db->query($sql);
 			$resultado = $query->result_array();
 			if (count($resultado)>0)

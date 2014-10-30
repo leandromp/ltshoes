@@ -4,7 +4,7 @@
 	
 		public function updateSimple($modulo_id,$perfil_id,$columna,$valor)
 		{
-			$this->db->where('usuario_id',$perfil_id);
+			$this->db->where('perfil_id',$perfil_id);
 			$this->db->where('modulo_id',$modulo_id);
 			if($this->db->update('permiso',array($columna=>$valor)))
 				return true;
@@ -23,7 +23,13 @@
 
 		}
 
-		//public function insertEmpty($id)
+		public function insertEmpty($modulo_id,$perfil_id)
+		{
+			if($this->db->insert("permiso",array("modulo_id"=>$modulo_id,"perfil_id"=>$perfil_id)))
+				return TRUE;
+			else
+				return FALSE;
+		}
 	
 	}
 	

@@ -27,9 +27,9 @@
 				return false;
 		}
 		
-		public function getPermisos($usuario_id,$modulo_id)
+		public function getPermisos($perfil_id,$modulo_id)
 		{
-			$this->db->where("usuario_id",$usuario_id);
+			$this->db->where("perfil_id",$perfil_id);
 			$this->db->where("modulo_id",$modulo_id);
 			$query=$this->db->get("permiso");
 			$resultado=$query->result_array();
