@@ -9,9 +9,14 @@
 
 	 	public function dashboard()
 	 	{
-	 		$this->load->library('menu');
-	 		$variables['menu'] = $this->menu->dame_menu();
-	 		$this->load->view('dashboard/index',$variables);
+	 		$user = $this->session->userdata("ltshoes");
+	 		if ($user['usuario_id']>0)
+	 		{
+	 			$this->load->library('menu');
+	 			$variables['menu'] = $this->menu->dame_menu();
+	 			$this->load->view('dashboard/index',$variables);	
+	 		}
+	 		
 	 	}
 	 
 	 }

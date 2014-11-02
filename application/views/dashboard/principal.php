@@ -31,7 +31,7 @@
                                     <i class="ion ion-bag"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                    Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -50,7 +50,7 @@
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                    Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -69,7 +69,7 @@
                                     <i class="ion ion-person-add"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                    Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -88,7 +88,7 @@
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                    Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -100,5 +100,70 @@
                             
                         </div><!-- /.col -->
                     </div>
+
+                        <div class="box">
+                            <div class="box-header" id="recargar">
+                                <div class="col-md-11"> <h3 class="box-title">Hover Data Table</h3> </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                             <div class=" col-xs-6 form-group">
+                                        <label>Fecha desde:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input id="desde" type="text" name="fecha" class="form-control" id="fecha" />
+                                        </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                             <div class=" col-xs-6 form-group">
+                                        <label>Fecha hasta:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input id="hasta" type="text" name="fecha" class="form-control" id="fecha" />
+                                        </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                            </div>
+                            <div class="box-body table-responsive">
+                            <? //if($clientes): ?>
+                            <? print_r($reportes) ?>
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Documento</th>
+                                            <th>Telefono</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       <?//foreach ($clientes as $key => $value) :?>
+                                            <tr>
+                                                <td> algo </td>
+                                                <td> algo </td>
+                                                <td> algo </td>
+                                                <td> algo </td>
+                                                <td> algo </td>
+                                                <td> algo </td>
+                                        <?//endforeach;?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Documento</th>
+                                            <th>Telefono</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <? //endif; ?>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
     </section>
 </aside>
+

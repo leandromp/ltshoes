@@ -2,7 +2,7 @@
    <header class="header">
             <a href="../../index.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                AdminLTE
+                LTShoes
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -65,15 +65,16 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span><? $usuario=$this->session->userdata("ltshoes");
+                                          echo $usuario['usuario']?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="../../img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?=$usuario['nombre'].','.$usuario['apellido']?>
+                                        <!--<small>Member since Nov. 2012</small>-->
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -90,9 +91,6 @@
                                 </li>-->
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                                    </div>
                                     <div class="pull-right">
                                         <a href="#" class="btn btn-default btn-flat">Cerrar Sesion</a>
                                     </div>
