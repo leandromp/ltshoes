@@ -77,12 +77,11 @@
                             </div>
 
                             <div class="col-xs-6 form-group">
-                                <label for="">Barrio</label>
-                                <input id="barrio" class="form-control" type="text" name="barrio"   value="<? if(isset($cliente)) echo $cliente['barrio'];?>">
+                                <label for="">Zona</label>
+                                <select class="form-control">
+                                    <option> Zona 1</option>
+                                </select>
                             </div>
-
-                            
-                              
                        </div>
 
                        <div class="box-footer">
