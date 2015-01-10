@@ -14,6 +14,7 @@
 			 		$variables['menu'] = $this->menu->dame_menu();
 			 		if ($permisos['consulta']==1)
 			 		{
+
 			 			$variables['nombre_pagina'] = $this->uri->segment(1);
 				 		$this->load->model("producto","producto",true);
 				 		$variables['productos']=$this->producto->listado();
@@ -74,9 +75,11 @@
 								$variables['error'] = 'hubo un error al intentar actualizar la Base de Datos';		
 							}
 							else
-								$variables['error'] = 'debe ingresar los datos necesarios para dar de alta al cliente';
+								$variables['error'] = 'debe ingresar los datos necesarios para guardar el producto';
 							
 						}
+						$this->load->model('configuracion','configuracion',TRUE);
+			 			$variables['tipo_productos']= $variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
 						$variables['vista']="form-inc";
 						$this->index($variables);
 					}
@@ -138,7 +141,7 @@
 									{
 										$resultado=$this->producto->update($id,$datos);
 										if($resultado==true)
-										$variables['error'] = 'Los datos fueron ingresados correctamente';
+										$variables['mensaje'] = 'Los datos fueron ingresados correctamente';
 										else
 										$variables['error'] = 'hubo un error al intentar actualizar la Base de Datos';		
 									}
@@ -179,14 +182,14 @@
 							{
 								$this->load->model("producto","producto",true);
 								$resultado = $this->producto->getTalles($id);
-								if($resultado)
-								{
+								//if($resultado)
+								//{
 									$variables['producto']=$this->producto->getProductoId($id);
 									$variables['talles']=$resultado;
 									$variables['vista']='talles-inc';
-								}
-								else
-									$mensaje['este producto no tiene ningun talle asociado'];
+								//}
+								//else
+									//$mensaje['este producto no tiene ningun talle asociado'];
 							}
 							else
 								$mensaje['no selecciono ningun producto'];

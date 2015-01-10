@@ -17,6 +17,7 @@
 	 		{
 	 			$this->load->model("configuracion","configuracion",TRUE);
 	 			$variables['localidades'] = $this->configuracion->getVariosCodigo(2);
+	 			$variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
 	 			$variables['nombre_pagina'] = $this->uri->segment(1);
 		 		$this->load->view('configuracion/index',$variables);
 	 		}
@@ -35,11 +36,25 @@
 		{
 			$this->load->model("configuracion","configuracion",TRUE);
 			$this->configuracion->eliminar($id);
-
-
 		}
 		else
 			header('location:'.site_url());
+	/*public function eliminar()
+	{
+		$user=$this->session->userdata("ltshoes");
+		if ($user['usuario_id']>0)
+		{
+			$this->load->model("empleado","empleado",true);
+			$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+			if ($permisos['baja']==1)
+		 	{
+		 		$item=$this->input->post('item');
+				$codigo=$this->input->post('codigo');
+		 	}
+		}
+		else
+			header('location:'.site_url());
+	}*/
 	}
 
  }

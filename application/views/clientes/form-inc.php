@@ -46,7 +46,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" name="fecha" class="form-control" id="fecha" />
+                                            <input type="text" name="fecha" class="form-control" id="fecha-nac" />
                                         </div><!-- /.input group -->
                             </div><!-- /.form group -->
 

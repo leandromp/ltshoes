@@ -102,65 +102,72 @@
 			$id=$this->input->post("id");
 			$cantidad = $this->input->post("cantidad");
 			$talle = $this->input->post("talle");
+			$stock = trim($this->input->post("stock"));
 			if($id>0)
 			{
-				if($cantidad>0)
-					{
-						$this->load->library("session");
-						$this->load->model("producto","producto",true);
-						$producto = $this->producto->getProductoId($id);
-						$carrito = $this->session->userdata("carrito");
-						if(isset($carrito['productos']))
+				if ($cantidad <= $stock)
+				{
+					if($cantidad>0)
 						{
-							$update_cantidad=0;
-							//Recorro el carro para saber si tengo que hacer un update de la cantidad
-							$productos=$carrito['productos'];
-							foreach ($productos as $key => $value) 
+							$this->load->library("session");
+							$this->load->model("producto","producto",true);
+							$producto = $this->producto->getProductoId($id);
+							$carrito = $this->session->userdata("carrito");
+							if(isset($carrito['productos']))
 							{
-								if($id==$value['id'])
+								$update_cantidad=0;
+								//Recorro el carro para saber si tengo que hacer un update de la cantidad
+								$productos=$carrito['productos'];
+								foreach ($productos as $key => $value) 
 								{
-									$update_cantidad=1;
-									$productos[$key]['cantidad']+=$cantidad;
+									if($id==$value['id'])
+									{
+										$update_cantidad=1;
+										$productos[$key]['cantidad']+=$cantidad;
+									}
+
+								}
+								//sino entonces lo que hago es agregar el producto al carro.
+								if($update_cantidad==0)
+								{
+									$producto["id"] = $producto["id"];
+									$producto["descripcion"] = $producto["descripcion"];
+									$producto["precio"] = $producto["precio"];
+									$producto["cantidad"] = $cantidad;
+									$producto["talle"] = $talle;
+									$productos[]=$producto;//agrego el producto al array
+									
+									//$this->session->set_userdata('carrito',$carrito);//actualizo la sesion
 								}
 
+
 							}
-							//sino entonces lo que hago es agregar el producto al carro.
-							if($update_cantidad==0)
+							else//es el primer producto
 							{
 								$producto["id"] = $producto["id"];
 								$producto["descripcion"] = $producto["descripcion"];
 								$producto["precio"] = $producto["precio"];
 								$producto["cantidad"] = $cantidad;
 								$producto["talle"] = $talle;
-								$productos[]=$producto;//agrego el producto al array
+								$productos[]=$producto;
 								
-								//$this->session->set_userdata('carrito',$carrito);//actualizo la sesion
 							}
 
+							$carrito['productos']=$productos;//actualizo el carrito 
+							$this->session->set_userdata('carrito',$carrito);
 
-						}
-						else//es el primer producto
-						{
-							$producto["id"] = $producto["id"];
-							$producto["descripcion"] = $producto["descripcion"];
-							$producto["precio"] = $producto["precio"];
-							$producto["cantidad"] = $cantidad;
-							$producto["talle"] = $talle;
-							$productos[]=$producto;
+							//print_r($carrito);
 							
+							$res['cantidad']=count($productos);
+							$res['res']=1;
+
 						}
-
-						$carrito['productos']=$productos;//actualizo el carrito 
-						$this->session->set_userdata('carrito',$carrito);
-
-						//print_r($carrito);
-						
-						$res['cantidad']=count($productos);
-						$res['res']=1;
-
-					}
+					else
+						$res['res']=2; //la cantidad no es mayor 0	
+				}
 				else
-					$res['res']=2; //la cantidad no es mayor 0
+					$res['res']=4; // la cantidad de producto ingresado es mayor que el stock disponible
+				
 			}
 			else
 			$res['res']=3; // no selecciono ningun producto 
@@ -282,6 +289,8 @@
 							$datos_venta['fecha'] = $fecha=date("Y-m-d");
 							$datos_venta['monto'] = $total_compra;
 							$datos_venta['id_cliente'] = $carrito['cliente']['id'];
+							$datos_venta['id_empleado'] = $this->input->post("empleado");
+
 							if ($id_venta=$this->venta->insertVenta($datos_venta))
 								{
 									$id_venta;
@@ -289,10 +298,22 @@
 									foreach ($carrito['productos'] as $key => $value) 
 									{
 										$datos_lv['id_producto'] = $value ['id'];
+										$cantidad = $this->venta->getCantidadRelacion($value['id'],$value['talle']);
+										$cantidad_anterior = $cantidad[0]['cantidad'];
+										$relacionid = $cantidad[0]['relacionid'];
+										$cantidad_actual= $cantidad_anterior - $value['cantidad'];
+										$ok=$this->venta->updateCantidad($relacionid,$cantidad_actual);
+										if ($ok==FALSE)
+										{
+											
+											header('location:'.site_url('ventas'));
+											break;
+										}
 										$datos_lv['cantidad'] = $value['cantidad'];
 										$datos_lv['precio'] = $value['precio'];
 										$datos_lv['id_venta'] = $id_venta;
 										$this->venta->insertLVenta($datos_lv);
+
 									}
 								}
 							else
@@ -322,10 +343,14 @@
 								$variables['total_compra'] = $total_compra;
 								$variables['opciones_pago']=$this->venta->getPPagos();
 								//print_r($variables);
+								$this->session->unset_userdata("carrito");
 								$this->index($variables);
 							}
 							else
+							{
+								$this->session->unset_userdata("carrito");
 								header('location:'.site_url('ventas'));
+							}
 								
 						}
 						//else
@@ -370,6 +395,7 @@
 			 				$datos_cc['id_cliente'] = $datos['id_cliente'];
 			 				$datos_cc['debe']= 0;
 			 				$last_id = $this->ccorriente->insertBlank($datos_cc);
+			 				
 			 				$datos['id_cuenta_corriente'] = $last_id;
 			 				// armo los datos para insertar en la tabla plan pago
 			 				$datos['debe'] = 0;
@@ -439,6 +465,16 @@
 			 }
 			 else
 			 	header('location:'.site_url());
+		}
+
+
+		public function mostrar_stock()
+		{
+			$talle=$this->input->post("talle");
+			$producto_id = $this->input->post("producto_id");
+			$this->load->model('venta','venta',TRUE);
+			$cantidad = $this->venta->getCantidadById($producto_id,$talle);
+			echo $cantidad;
 		}
 
 }

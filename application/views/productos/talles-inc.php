@@ -21,7 +21,7 @@
                                     <div class="col-md-11"> <h3 class="box-title">PRODUCTO :<?=$producto['descripcion'];?> | CODIGO <?=$producto['codigo']?></h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                <? if($talles): ?>
+                                
                                     
                                         <table id="example1" class="table table-bordered table-hover">
                                             <thead>
@@ -34,6 +34,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <? if($talles): ?>
                                                <?foreach ($talles as $key => $value) :?>
                                                     <tr id="filaA<?=$value['id']?>">
                                                         <td id="talleA<?=$value['id'];?>"> <?=$value['numero']?></td>
@@ -42,6 +43,7 @@
                                                         <td><button role="button" class="btn btn-danger" onclick="eliminar_talle_id('<?=$value['id']?>')"> Eliminar </button> </td>
                                                     </tr>
                                                 <?endforeach;?>
+                                             <? endif; ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -52,7 +54,7 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                        <? endif; ?>
+                                       
                                         
                                         <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
                                    

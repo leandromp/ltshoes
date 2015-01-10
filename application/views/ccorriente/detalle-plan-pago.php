@@ -17,22 +17,34 @@
 		         	<tr>
 		         		<th> Numero de pago </th>
 		         		<th> Monto </th>
+		         		<th> Monto Pagado </th>
 		         		<th> Fecha Vencimiento </th>
 		         		<th> Fecha Pago </th>
 		         		<th> Cancelar </th>
 		         	</tr>
-					<?php foreach ($detalle_pp as $k => $v): ?>                             
+		         	<?
+		         		$total_adeudado=0;
+		         		$total_pagado=0; 
+		         	?>
+					<?php foreach ($detalle_pp as $k => $v): ?>       
+					<?
+						$total_adeudado+=$v['monto'];
+						$total_pagado+=$v['monto_pago'];
+					 ?>                      
 					    <tr>
 					    	<th> <?=$v['id']?> </th>
 					        <td> <?=$v['monto']?> </td>
-					        <td> <?=$v['fecha_vencimiento']?> </td>
-					        <td> <?=$v['fecha_pago']?> </td>
+					        
+					         <td> <?= $v['monto_pago']; ?> </td>
+					         <td> <?= $this->varios_library->rotar_fecha($v['fecha_vencimiento']);?> </td>
+					        <td> <?= $this->varios_library->rotar_fecha($v['fecha_pago']);?> </td>
 					        <td> <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal<?=$v['id']?>">
 								  Cancelar
 								</button> 
 							</td>
 					    </tr>                                                      
 					 <?php endforeach ?>
+					 <tr>  <td> <b>Total adeudado:</b> <td> <?= $total_adeudado;?> </td> <td> <b>Total Pagado:</b> </td> <td> <?=$total_pagado?> </td> </tr>
 					 </table>
 				</div>
 				<div class="box box-footer">
@@ -77,7 +89,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" name="fecha" class="form-control" id="fecha<?=$v['id']?>" />
+                                            <input type="text" name="fecha" value="<?=date('d/m/Y')?>" class="form-control" id="fecha<?=$v['id']?>" />
                                         </div><!-- /.input group -->
                          </div><!-- /.form group -->
                         <br>

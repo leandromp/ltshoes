@@ -18,8 +18,8 @@
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_1" data-toggle="tab">Tab 1</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Tab 2</a></li>
+                                    <li class="active"><a href="#tab_1" data-toggle="tab">Localidades</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">Tipo Productos</a></li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             Dropdown <span class="caret"></span>
@@ -53,7 +53,7 @@
                                                     <tbody>
                                                        <?foreach ($localidades as $key => $value) :?>
                                                             <tr>
-                                                                <td><?=$value['codigo']?></td>
+                                                                <td><?=$value['valor']?></td>
                                                                 <td><?=$value['nombre']?></td>                                                     
                                                                 <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                                         <?endforeach;?>
@@ -71,13 +71,32 @@
                                         </div><!-- /.box -->
                                     </div><!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
-                                        The European languages are members of the same family. Their separate existence is a myth.
-                                        For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                                        in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                                        new common language would be desirable: one could refuse to pay expensive translators. To
-                                        achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                                        words. If several languages coalesce, the grammar of the resulting language is more simple
-                                        and regular than that of the individual languages.
+                                       <? if($tipo_productos): ?>
+                                                <table id="example1" class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       <?foreach ($tipo_productos as $key => $value) :?>
+                                                            <tr>
+                                                                <td><?=$value['valor']?></td>
+                                                                <td><?=$value['nombre']?></td>                                                     
+                                                                <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
+                                                        <?endforeach;?>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <? endif; ?>
                                     </div><!-- /.tab-pane -->
                                 </div><!-- /.tab-content -->
                             </div><!-- nav-tabs-custom -->

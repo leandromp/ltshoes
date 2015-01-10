@@ -1,6 +1,7 @@
  <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
 <section class="content-header">
+
                     <h1>
                         Dashboard
                         <small>Control panel</small>
@@ -21,16 +22,16 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        150
+                                        <?= round($semana_po,2) ?> %
                                     </h3>
                                     <p>
-                                        Ventas
+                                        Ventas en relacion a la semana anterior
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="javascript:void(0)" class="small-box-footer" onclick="dashboard_tablas(1)">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -40,16 +41,16 @@
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                        53<sup style="font-size: 20px">%</sup>
+                                        <?= round($semana_po,2) ?> %
                                     </h3>
                                     <p>
-                                        Cobranzas
+                                        Cobranzas en relacion a la semana anterior
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="#" class="small-box-footer" onclick="dashboard_tablas(2)">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -59,16 +60,16 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                        44
+                                        <?= $cantidad_productos ?>
                                     </h3>
                                     <p>
                                         Productos
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="fa fa-dropbox"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="javascript:void(0)" class="small-box-footer">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -78,14 +79,14 @@
                             <div class="small-box bg-red">
                                 <div class="inner">
                                     <h3>
-                                        65
+                                        <?= $cantidad_clientes ?>
                                     </h3>
                                     <p>
                                         Clientes
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
+                                    <i class="fa fa-group"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
@@ -103,7 +104,7 @@
 
                         <div class="box">
                             <div class="box-header" id="recargar">
-                                <div class="col-md-11"> <h3 class="box-title">Hover Data Table</h3> </div>
+                                <div class="col-md-11"> <h3 id="titulo-reporte" name="" class="box-title">Ver detalles de :</h3> </div>
                             </div><!-- /.box-header -->
                             <div class="box-body">
                              <div class=" col-xs-6 form-group">
@@ -125,10 +126,10 @@
                                         </div><!-- /.input group -->
                             </div><!-- /.form group -->
                             </div>
-                            <div class="box-body table-responsive">
-                            <? //if($clientes): ?>
-                            <? print_r($reportes) ?>
+                            <div id="exmaple1" class="box-body table-responsive">
+                            
                                 <table id="example1" class="table table-bordered table-hover">
+                                <? if ($reportes): ?>
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -142,12 +143,12 @@
                                     <tbody>
                                        <?//foreach ($clientes as $key => $value) :?>
                                             <tr>
-                                                <td> algo </td>
-                                                <td> algo </td>
-                                                <td> algo </td>
-                                                <td> algo </td>
-                                                <td> algo </td>
-                                                <td> algo </td>
+                                                <td>  </td>
+                                                <td>  </td>
+                                                <td>  </td>
+                                                <td>  </td>
+                                                <td>  </td>
+                                                <td>  </td>
                                         <?//endforeach;?>
                                     </tbody>
                                     <tfoot>
@@ -161,8 +162,11 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <? //endif; ?>
+                            <? endif; ?>
                             </div><!-- /.box-body -->
+                             <div class="box-footer">
+                              <button class="btn btn-primary" type="" onclick="ver_resultados_reportes()">Ver Resultados</button> 
+                              </div>
                         </div><!-- /.box -->
     </section>
 </aside>

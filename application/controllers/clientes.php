@@ -65,8 +65,11 @@
 							if($error!=1) //si los datos no vienen vacios entonces intento hacer el insert en la DB
 							{
 								$resultado=$this->cliente->insert($datos);
-								if($resultado==true)
-								$variables['error'] = 'Los datos fueron ingresados correctamente';
+								if($resultado==true){
+									$variables['mensaje'] = 'Los datos fueron ingresados correctamente';
+									header('location:'.site_url('clientes/index'));
+								}
+								
 								else
 								$variables['error'] = 'hubo un error al intentar actualizar la Base de Datos';		
 							}

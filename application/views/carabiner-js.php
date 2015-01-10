@@ -20,7 +20,7 @@
         <!-- jQuery Knob Chart -->
         <script src="<?=URL_BASE?>/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
         <!-- daterangepicker -->
-        <!--<script src="<?=URL_BASE?>/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>-->
+        <script src="<?=URL_BASE?>/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="<?=URL_BASE?>/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- iCheck -->
@@ -71,6 +71,15 @@
         });
 
         $('#hasta').datepicker({
+            format: "yyyy/mm/dd",
+            startDate: "2012-01-01",
+            endDate: "2015-01-01",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+         $('#fecha-nac').datepicker({
             format: "yyyy/mm/dd",
             startDate: "2012-01-01",
             endDate: "2015-01-01",

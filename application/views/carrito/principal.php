@@ -30,7 +30,7 @@
                                     <div class="col-md-11"> <h3 class="box-title"><?=strtoupper($modulo_nombre);?></h3> </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                <? if($carrito): ?>
+                                <? if(isset($carrito['productos'])) : ?>
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -69,10 +69,13 @@
                                             <tr> <th> </th> <th> </th> <th> </th> <th> </th> <th> </th><th> <h4> TOTAL DE LA VENTA: </h4></th>  <th><h4>$ <?=$total?></h4> </th> </tr>
                                         </tfoot> 
                                     </table>
+                                    </div><!-- /.box-body -->
+                                        <div class="box-footer" > <a href="<?=site_url('ventas/confirmar_compra');?>" class="btn btn-primary" >Confirmar Compra</a> </div><br>
+                                    </div><!-- /.box -->
+                                    <? else: ?>
+                                    <div class="alert alert-warning"> No existen productos cargados en el Carrito </div>
                                     <? endif; ?>
-                                </div><!-- /.box-body -->
-                                <div class="box-footer" > <a href="<?=site_url('ventas/confirmar_compra');?>" class="btn btn-primary" >Confirmar Compra</a> </div><br>
-                            </div><!-- /.box -->
+                                
                             <? if(isset($mensaje)): ?>
                                 <div id="mensaje" class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
                             <? endif ?>

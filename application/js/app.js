@@ -30,8 +30,9 @@ function agregar_producto_carrito(id)
 	//var cantidad="#cantidad-"+id;
 	var cantidad=$("#cantidad-"+id).val();
 	var talle=$("#talle-"+id).val();
+	var stock=$("#stock-"+id).html();
 	$("#btn-agregar").hide();
-	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad,talle:talle},function(data){
+	$.post(URL_BASE+'ventas/agregar_producto',{id:id,cantidad:cantidad,talle:talle,stock:stock},function(data){
 		switch(data.res)
 		{
 			case 1:
@@ -42,6 +43,10 @@ function agregar_producto_carrito(id)
 			case 2:
 				$("#btn-agregar").show();
 				alert('las cantidad no pueden ser menores o iguales a 0');
+				break;
+			case 4:
+				$("#btn-agregar").show();
+				alert('la cantidad es mayor al stock actual no se puede agregar');
 				break;
 		}
 	},'json');
@@ -191,4 +196,52 @@ function cancelar_pago(id)
 			
 	},'json');
 }
+/**************************************************************************************************/
+function cambiar_cantidad(id_producto)
+{
+	var nombre = '#talle-'+id_producto+' option:selected';
+	var talle = $(nombre).val();
+	$.post(URL_BASE+'ventas/mostrar_stock',{talle:talle,producto_id:id_producto},function(data){
+		
+		$("#stock-"+id_producto).html(data);
+	},'json');
+	//alert (talle);
+}
 
+function dashboard_tablas(id)
+{
+	var valor="";
+	switch(id)
+	{
+		case 1:
+			valor = "Ver detalles de : Ventas";
+		break;
+		case 2:
+			valor = "Ver detalles de : Compras";
+		break;
+	}
+	$("#titulo-reporte").html(valor);
+	$("#titulo-reporte").attr("name",id);
+}
+
+function ver_resultados_reportes()
+{
+	var id_tabla = $("#titulo-reporte").attr("name");
+	var desde = $("#desde").val();
+	var hasta = $("#hasta").val();
+	$.post(URL_BASE+'reportes/mostrar_reporte',{desde:desde,hasta:hasta,id_tabla:id_tabla},function(data){
+		switch(data)
+		{
+			default:
+				$("#example1").html('');
+				$("#example1").append(data);
+			break;
+			case '2':
+				alert('debe seleccionar al menos un tipo de reporte de los de arriba');
+			break;
+			case '3':
+				alert('la fecha desde debe ser menor que la fecha hasta');
+			break;
+		}
+	});
+}

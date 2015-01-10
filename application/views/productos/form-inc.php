@@ -42,7 +42,11 @@
 
                             <div class=" col-xs-6 form-group">
                                 <label for="exampleInputEmail1">Tipo</label>
-                                <input id="tipo" class="form-control" type="text" name="tipo" value="<? if(isset($producto)) echo $producto['tipo'];?>" >
+                                <select id="tipo" name="tipo" class="form-control">
+                                  <? foreach ($tipo_productos as $key => $value) : ?>
+                                      <option><?= $value['nombre'] ?></option>
+                                  <? endforeach; ?>
+                                </select>
                             </div>
 
                             <div class=" col-xs-6 form-group">

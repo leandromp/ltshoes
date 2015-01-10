@@ -37,7 +37,7 @@
 			 		if ($permisos['consulta']==1)
 			 		{
 			 			//echo $id;
-
+			 			$this->load->library("varios_library");
 			 			$this->load->model("ccorriente","ccorriente",TRUE);
 			 			$this->load->model("cliente","cliente",TRUE);
 			 			$variables['cliente']=$this->cliente->getClienteId($id);
@@ -58,6 +58,7 @@
 				$user=$this->session->userdata("ltshoes");
 				if ($user['usuario_id']>0)
 				{
+					$this->load->library("varios_library");
 					$this->load->model("empleado","empleado",true);
 					$permisos=$this->empleado->getPermisos($user['usuario_id'],30);
 					$this->load->library('menu');
@@ -86,7 +87,7 @@
 			{
 				$fecha = $this->input->post("fecha");
 				$fecha_temp=explode("/", $fecha);
-				$datos['fecha_pago']=$fecha_temp[2].'-'.$fecha_temp[1].'/'.$fecha_temp[0];
+				$datos['fecha_pago']=$fecha_temp[2].'-'.$fecha_temp[1].'-'.$fecha_temp[0];
 				$datos['monto_pago'] = $this->input->post("monto");
 				$datos['id_empleado'] = $this->input->post("id_empleado");
 				$id = $this->input->post("id");

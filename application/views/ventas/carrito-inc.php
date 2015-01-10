@@ -48,6 +48,7 @@
                                                 <th>tipo</th>
                                                 <th>Talles</th>
                                                 <th>Cantidad</th>
+                                                <th>Stock</th>
                                                 <th>Agregar</th>
                                             </tr>
                                         </thead>
@@ -59,13 +60,18 @@
                                                     <td><?=$value['precio']?></td>
                                                     <td><?=$value['tipo']?></td>
                                                     <td>
-                                                        <select id="talle-<?=$value['id']?>">
+
+                                                    <!-- Id es el codigo identificador unico del producto por eso lo paso solo como parametro para poder 
+                                                         traer ademas la cantidad de productos correspondientes  -->
+                                                        <select onchange="cambiar_cantidad(<?=$value['id'];?>)" name="talles" id="talle-<?=$value['id']?>">
                                                             <?foreach ($value['talles'] as $k => $v):?>
                                                             <option> <?= $v['numero'];?> </option>
+                                                            <? if($k==0) echo  $cantidad_talle = $v['cantidad'];?>
                                                             <?endforeach;?>
                                                         </select>
                                                     </td>
                                                     <td><input type="text" name="cantidad-<?=$value['id']?>" id="cantidad-<?=$value['id']?>" > </td>
+                                                    <td> <div id="stock-<?=$value['id']?>"> <?= $cantidad_talle ?> </div>  </td>
                                                     <td><button id="btn-agregar" onclick="agregar_producto_carrito(<?=$value['id']?>);" role="button" class="btn btn-info"> Agregar </button> </a> </td>
                                             <?endforeach;?>
                                         </tbody>

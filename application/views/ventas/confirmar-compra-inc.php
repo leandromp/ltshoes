@@ -93,7 +93,11 @@
                                 <option value="3"> Plan de pago Semanal </option>
                             </select> 
                             <label> Seleccione el vendedor </label>
-                            <?= $select;?>
+                            <select id="empleado" class="form-control">
+                                 <? foreach ($empleados as $key => $value):?>
+                                    <option value="<?=$value['id']?>"> <?=$value['nombre']?> </option>";
+                                 <? endforeach; ?>
+                            </select>
                             <button class="btn btn-primary" >Confirmar Compra</button>
                             </div>
               
