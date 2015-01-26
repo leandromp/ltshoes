@@ -15,8 +15,11 @@
 			 		$variables['menu'] = $this->menu->dame_menu();
 			 		if ($permisos['consulta']==1)
 			 		{
+
 			 			$variables['nombre_pagina'] = $this->uri->segment(1);
 				 		$this->load->model("cliente","cliente",true);
+				 		$this->load->model("varios","varios",TRUE);
+				 		$variables['localidades']=$this->varios->getVariosCodigo(2);
 				 		$variables['clientes']=$this->cliente->getClientes();
 				 		$this->load->view('clientes/index',$variables);
 			 		}

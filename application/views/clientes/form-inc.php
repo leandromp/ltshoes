@@ -72,7 +72,11 @@
 
                             <div class="col-xs-6 form-group">
                                 <label for="">Localidad</label>
-                                <select id="localidad" class="form-control" type="text" name="localidad"   value="<? if(isset($cliente)) echo $cliente['localidad'];?>">
+                                <select id="localidad" class="form-control">
+                                    <? foreach ($localidades as $key => $value): ?>
+                                        <option value="<?=$value['nombre']?>"><?=$value['nombre']?></option>
+                                    <? endforeach; ?>
+                                    <option></option>
                                 </select>
                             </div>
 

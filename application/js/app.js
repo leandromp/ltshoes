@@ -245,3 +245,29 @@ function ver_resultados_reportes()
 		}
 	});
 }
+
+function agregar_opcion()
+{
+	var tipo = $("#tipo").val();
+	var valor = $("#valor").val();
+	$.post(URL_BASE+'configuraciones/agregar_opcion',{valor:valor,tipo:tipo},function(data){
+			switch(data)
+			{
+				case '1':
+					$("#exito").append('Se guardaron los datos con exito');
+					$("#exito").show();
+					setTimeout(function(){
+					$("#exito").hide();
+					location.reload();
+					},5000);
+				break;
+				default :
+					$("#mensaje").append('No se puede enviar ningun campo vacio, intentelo de nuevo');
+					$("#mensaje").show();
+				setTimeout(function(){
+					$("#mensaje").hide();
+				},3000);
+				break;
+			}
+	});
+}

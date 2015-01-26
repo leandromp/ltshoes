@@ -14,9 +14,22 @@
 
 		public function eliminar($id)
 		{
-			$this->db->delete_where("varios",array('id'=>$codigo));
+			if($this->db->delete("varios",array('id'=>$id)))
+				return TRUE;
+			else
+				return FALSE;
+
 			
 		}
+
+		public function insert($datos)
+		{
+			if($this->db->insert("varios",$datos))
+				return TRUE;
+			else
+				return FALSE;
+		}
+
 		
 	
 	}

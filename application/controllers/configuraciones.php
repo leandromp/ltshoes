@@ -34,29 +34,47 @@
 		$id = $this->input->post("id");
 		if($id>0)
 		{
+			
 			$this->load->model("configuracion","configuracion",TRUE);
-			$this->configuracion->eliminar($id);
+			if($this->configuracion->eliminar($id))
+				echo 1;	
+			else
+				echo 2;
 		}
 		else
 			header('location:'.site_url());
-	/*public function eliminar()
+	}
+
+	public function agregar_opcion()
 	{
+		
 		$user=$this->session->userdata("ltshoes");
 		if ($user['usuario_id']>0)
 		{
 			$this->load->model("empleado","empleado",true);
-			$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
-			if ($permisos['baja']==1)
-		 	{
-		 		$item=$this->input->post('item');
-				$codigo=$this->input->post('codigo');
-		 	}
+			$permisos=$this->empleado->getPermisos($user['usuario_id'],19);
+			if($permisos['alta']==1)
+			{
+
+				$valor=$this->input->post("valor");
+				$tipo=$this->input->post("tipo");
+				if($valor!="" and $tipo!="")
+				{
+					$datos['codigo']=$tipo;
+					$datos['nombre']=$valor;
+					$this->load->model("configuracion","configuracion",TRUE);
+					$this->configuracion->insert($datos);
+					echo 1;
+				}
+				else
+					echo 3;
+			}
+			else
+				echo 2;
 		}
 		else
 			header('location:'.site_url());
-	}*/
 	}
-
  }
  
  /* End of file configuraciones.php */

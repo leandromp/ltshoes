@@ -9,8 +9,11 @@
                         <li><a href="#"><i class="fa fa-dashboard"></i> Configuraciones</a></li>
                     </ol>
                 </section>
+
                 <!-- Main content -->
                 <section class="content">
+
+                  <a class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal"> Agregar Opci&oacute;n  </a><br>
                     <div class="md-col-1">
                     </div>
                     <br>
@@ -20,18 +23,6 @@
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Localidades</a></li>
                                     <li><a href="#tab_2" data-toggle="tab">Tipo Productos</a></li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            Dropdown <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                            <li role="presentation" class="divider"></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                        </ul>
-                                    </li>
                                     <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                                 </ul>
                                 <div class="tab-content">
@@ -101,4 +92,47 @@
                                 </div><!-- /.tab-content -->
                             </div><!-- nav-tabs-custom -->
                 </div><!--box-->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="
+                    true">&times;</span><span class="sr-only">Cerrar</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Agregar Opcion</h4>
+                  </div>
+                  <div class="modal-body">
+                  
+                        <div class="form-group">
+                        <label> Seleccione el Cobrador </label>
+                            <select id="tipo" class="form-control">
+                                <option value="1">Talle Ropa</option>
+                                <option value="3">Talle Calzado</option>
+                                <option value="2">Localidad</option>
+                                <option value="4">Zona</option>
+                            </select>
+                        </div>
                         
+                        <div class="form-group">
+                            <label>Valor</label>
+                            <input id="valor" class="form-control" type="text">
+                        </div>
+                        <br>
+                      <div class="alert alert-danger alert-dismisable" style="display:none" id="mensaje">
+                      <i class="fa fa-ban"></i>
+                        
+                      </div>
+
+                       <div class="alert alert-success alert-dismisable" style="display:none" id="exito">
+                      <i class="fa fa-ban"></i>
+                        
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button onclick="agregar_opcion();" type="button" class="btn btn-primary">Guardar Cambios</button>
+                  </div>
+                </div>
+              </div>
+            </div>
