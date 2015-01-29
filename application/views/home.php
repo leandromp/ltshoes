@@ -1,6 +1,6 @@
 <body class="skin-blue">
    <header class="header">
-            <a href="<?=site_url();?>" class="logo">
+            <a href="<?=site_url('home/dashboard');?>" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 LTShoes
             </a>

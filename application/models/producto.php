@@ -57,9 +57,9 @@
 					return false;
 			}
 
-			public function getComboTalles($id_producto)
+			public function getComboTalles($id_producto,$tipo)
 			{
-				$sql="select * from talle where id NOT IN (select id_talle from relacion_talle where id_producto=".$id_producto.")";
+				$sql="SELECT * FROM talle where id NOT IN (select id_talle from relacion_talle where id_producto=".$id_producto.") AND tipo_producto=".$tipo;
 				$query=$this->db->query($sql);
 				$resultado=$query->result_array();
 				return $resultado;

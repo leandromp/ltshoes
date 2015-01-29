@@ -68,6 +68,23 @@ class Reporte extends CI_Model {
 
 	}
 
+	public function getMora($fecha)
+	{
+		$sql="select c.nombre,c.apellido,c.direccion,c.telefono,dpp.monto,
+						datediff('".$fecha."',dpp.fecha_vencimiento) as dias_mora
+							from cliente c
+						inner join cuenta_corriente cc on (c.id=cc.id_cliente)
+						inner join plan_pago pp on (cc.id=pp.id_cuenta_corriente)
+						inner join detalle_plan_pago dpp on (pp.id=dpp.plan_pago_id)
+						where dpp.fecha_vencimiento<'".$fecha."'";
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		if ($query->num_rows()>0)
+			return $res;
+		else
+			return FALSE;
+	}
+
 }
 
 /* End of file reporte.php */

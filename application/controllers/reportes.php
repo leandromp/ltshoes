@@ -62,6 +62,14 @@
 				 echo 2;//no selecciono ningun tipo de reporte
 
 			}
+
+			public function ver_moras()
+			{
+				$fecha = date('Y-m-d');
+				$this->load->model("reporte","reporte",TRUE);
+				$variables['reporte'] = $this->reporte->getMora($fecha);
+				$this->load->view("dashboard/mora-detalle",$variables);
+			}
 		
 		}
 		

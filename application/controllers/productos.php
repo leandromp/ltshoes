@@ -205,7 +205,13 @@
 			{
 				$id=$this->input->post("producto_id");
 				$this->load->model("producto","producto",true);
-				$talles = $this->producto->getComboTalles($id);
+				$tipo = $this->producto->getProductoId($id);
+				$tipo_cat = strtoupper($tipo['tipo']);
+				if($tipo!="" and $tipo_cat=="CALZADO")
+					$tipo=1;
+				else
+					$tipo=2;
+				$talles = $this->producto->getComboTalles($id,$tipo);
 				echo json_encode($talles);
 			}
 

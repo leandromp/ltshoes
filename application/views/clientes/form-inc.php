@@ -72,7 +72,7 @@
 
                             <div class="col-xs-6 form-group">
                                 <label for="">Localidad</label>
-                                <select id="localidad" class="form-control">
+                                <select id="localidad" name="localidad" class="form-control">
                                     <? foreach ($localidades as $key => $value): ?>
                                         <option value="<?=$value['nombre']?>"><?=$value['nombre']?></option>
                                     <? endforeach; ?>
@@ -81,9 +81,12 @@
                             </div>
 
                             <div class="col-xs-6 form-group">
-                                <label for="">Zona</label>
-                                <select class="form-control">
-                                    <option> Zona 1</option>
+                                <label for="">Zonas</label>
+                                <select id="zonas" name="zona" class="form-control">
+                                    <? foreach ($zonas as $key => $value): ?>
+                                        <option value="<?=$value['nombre']?>"><?=$value['nombre']?></option>
+                                    <? endforeach; ?>
+                                    <option></option>
                                 </select>
                             </div>
                        </div>

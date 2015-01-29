@@ -50,6 +50,14 @@
 			else
 				return false;
 		}
+		/******************** METODOS PARA LAS TABLA TALLE ***************************/
+		public function deleteTalle()
+		{
+			if ($this->db->delete("talle",array("id" => $id)))
+				return true;
+			else
+				return false;
+		}
 	
 	}
 	

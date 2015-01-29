@@ -57,26 +57,26 @@
                         </div><!-- ./col -->
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-yellow">
+                            <div class="small-box bg-red">
                                 <div class="inner">
                                     <h3>
-                                        <?= $cantidad_productos ?>
+                                        Ver Informe Moras
                                     </h3>
                                     <p>
-                                        Productos
+                                        
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="fa fa-dropbox"></i>
+                                    <i class="fa fa-exclamation-circle"></i>
                                 </div>
-                                <a href="javascript:void(0)" class="small-box-footer">
+                                <a href="javascript:void(0)" class="small-box-footer" onclick="informe_moras()">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-red">
+                            <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
                                         <?= $cantidad_clientes ?>

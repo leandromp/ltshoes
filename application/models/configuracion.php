@@ -12,6 +12,17 @@
 				return FALSE;
 		}
 
+		public function getTalles($tipo_producto)
+		{
+			$sql="SELECT id as valor,numero as nombre FROM talle where tipo_producto=".$tipo_producto;
+			$query = $this->db->query($sql);
+			$resultado = $query->result_array();
+			if(count($resultado)>0)
+				return $resultado;
+			else
+				return FALSE;
+		}
+
 		public function eliminar($id)
 		{
 			if($this->db->delete("varios",array('id'=>$id)))
@@ -22,9 +33,17 @@
 			
 		}
 
-		public function insert($datos)
+		public function insertVarios($datos)
 		{
 			if($this->db->insert("varios",$datos))
+				return TRUE;
+			else
+				return FALSE;
+		}
+
+		public function insertTalle($datos)
+		{
+			if($this->db->insert("talle",$datos))
 				return TRUE;
 			else
 				return FALSE;

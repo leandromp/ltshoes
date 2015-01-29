@@ -17,7 +17,9 @@
 	 		{
 	 			$this->load->model("configuracion","configuracion",TRUE);
 	 			$variables['localidades'] = $this->configuracion->getVariosCodigo(2);
-	 			$variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
+	 			$variables['zonas'] = $this->configuracion->getVariosCodigo(4);
+	 			$variables['talles_calzado'] = $this->configuracion->getTalles(1);
+	 			$variables['talles_ropa'] = $this->configuracion->getTalles(2);
 	 			$variables['nombre_pagina'] = $this->uri->segment(1);
 		 		$this->load->view('configuracion/index',$variables);
 	 		}
@@ -63,8 +65,25 @@
 					$datos['codigo']=$tipo;
 					$datos['nombre']=$valor;
 					$this->load->model("configuracion","configuracion",TRUE);
-					$this->configuracion->insert($datos);
-					echo 1;
+					if($tipo>2)
+					{
+						if($tipo==3)
+							$datos['codigo']=2; //cambio por que el valor de la tabla varios es 2
+
+						$ok = $this->configuracion->insertVarios($datos);
+					}
+						
+					else
+					{
+						$datos_talle['numero'] = $valor;
+						$datos_talle['tipo_producto'] = $tipo;
+						$ok = $this->configuracion->insertTalle($datos_talle);
+					}
+
+					if($ok==TRUE)
+						echo 1;
+					else
+						echo 3;
 				}
 				else
 					echo 3;

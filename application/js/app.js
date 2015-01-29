@@ -5,6 +5,10 @@ function eliminar (id,controlador)
 		{
 			case '1':
 				alert("Se ah eliminado con exito el registro");
+				if(controlador=='talles')
+				{
+					controlador='configuraciones'
+				}
 				window.location.href=URL_BASE+controlador;
 				break;
 			case '2':
@@ -246,6 +250,17 @@ function ver_resultados_reportes()
 	});
 }
 
+function informe_moras()
+{
+	$.post(URL_BASE+"reportes/ver_moras",{},function(data){
+		$("#example1").html('');
+		$("#example1").append(data);
+	});
+}
+
+
+
+/***************************************************************************************************************/
 function agregar_opcion()
 {
 	var tipo = $("#tipo").val();

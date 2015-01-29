@@ -21,6 +21,7 @@
 				 		$this->load->model("varios","varios",TRUE);
 				 		$variables['localidades']=$this->varios->getVariosCodigo(2);
 				 		$variables['clientes']=$this->cliente->getClientes();
+				 		$variables['zonas'] = $this->varios->getVariosCodigo(4);
 				 		$this->load->view('clientes/index',$variables);
 			 		}
 			 		else
@@ -60,7 +61,7 @@
 									$error=1;
 							}						
 							$datos["localidad"] = $this->input->post("localidad");
-							$datos["barrio"] = $this->input->post("barrio");
+							$datos["zona"] = $this->input->post("zona");
 							$datos["direccion_laboral"] = $this->input->post("direccion_laboral");
 							$datos["telefono_laboral"] = $this->input->post("telefono_laboral");
 							$this->load->model("cliente","cliente",true);
@@ -135,7 +136,7 @@
 									}						
 
 									$datos["localidad"] = $this->input->post("localidad");
-									$datos["barrio"] = $this->input->post("barrio");
+									$datos["zona"] = $this->input->post("zona");
 									$datos["direccion_laboral"] = $this->input->post("direccion_laboral");
 									$datos["telefono_laboral"] = $this->input->post("telefono_laboral");
 									$this->load->model("cliente","cliente",true);
@@ -144,7 +145,7 @@
 									{
 										$resultado=$this->cliente->update($id,$datos);
 										if($resultado==true)
-										$variables['error'] = 'Los datos fueron ingresados correctamente';
+										$variables['mensaje'] = 'Los datos fueron ingresados correctamente';
 										else
 										$variables['error'] = 'hubo un error al intentar actualizar la Base de Datos';		
 									}

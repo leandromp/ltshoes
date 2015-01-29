@@ -22,7 +22,9 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Localidades</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Tipo Productos</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">Zonas</a></li>
+                                    <li><a href="#tab_3" data-toggle="tab">Talles Calzado</a></li>
+                                    <li><a href="#tab_4" data-toggle="tab">Talles Ropa</a></li>
                                     <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                                 </ul>
                                 <div class="tab-content">
@@ -44,7 +46,7 @@
                                                     <tbody>
                                                        <?foreach ($localidades as $key => $value) :?>
                                                             <tr>
-                                                                <td><?=$value['valor']?></td>
+                                                                <td><?=$value['id']?></td>
                                                                 <td><?=$value['nombre']?></td>                                                     
                                                                 <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                                         <?endforeach;?>
@@ -62,7 +64,7 @@
                                         </div><!-- /.box -->
                                     </div><!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
-                                       <? if($tipo_productos): ?>
+                                       <? if($zonas): ?>
                                                 <table id="example1" class="table table-bordered table-hover">
                                                     <thead>
                                                         <tr>
@@ -72,9 +74,9 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                       <?foreach ($tipo_productos as $key => $value) :?>
+                                                       <?foreach ($zonas as $key => $value) :?>
                                                             <tr>
-                                                                <td><?=$value['valor']?></td>
+                                                                <td><?=$value['id']?></td>
                                                                 <td><?=$value['nombre']?></td>                                                     
                                                                 <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
                                                         <?endforeach;?>
@@ -89,6 +91,62 @@
                                                 </table>
                                                 <? endif; ?>
                                     </div><!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_3">
+                                       <? if($talles_calzado): ?>
+                                                <table id="example1" class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       <?foreach ($talles_calzado as $key => $value) :?>
+                                                            <tr>
+                                                                <td><?=$value['valor']?></td>
+                                                                <td><?=$value['nombre']?></td>                                                     
+                                                                <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['valor']?>,'talles')"> Eliminar </button> </td>
+                                                        <?endforeach;?>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <? endif; ?>
+                                    </div><!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_4">
+                                       <? if($talles_ropa): ?>
+                                                <table id="example1" class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       <?foreach ($talles_ropa as $key => $value) :?>
+                                                            <tr>
+                                                                <td><?=$value['valor']?></td>
+                                                                <td><?=$value['nombre']?></td>                                                     
+                                                                <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['valor']?>,'talles')"> Eliminar </button> </td>
+                                                        <?endforeach;?>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>                                                      
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <? endif; ?>
+                                    </div><!-- /.tab-pane -->   
                                 </div><!-- /.tab-content -->
                             </div><!-- nav-tabs-custom -->
                 </div><!--box-->
@@ -105,11 +163,11 @@
                   <div class="modal-body">
                   
                         <div class="form-group">
-                        <label> Seleccione el Cobrador </label>
+                        <label> Seleccione el Tipo Configuraci&oacute;n</label>
                             <select id="tipo" class="form-control">
-                                <option value="1">Talle Ropa</option>
-                                <option value="3">Talle Calzado</option>
-                                <option value="2">Localidad</option>
+                                <option value="1">Talle Calzado</option>
+                                <option value="2">Talle Ropa</option>
+                                <option value="3">Localidad</option>
                                 <option value="4">Zona</option>
                             </select>
                         </div>
