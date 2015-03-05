@@ -61,11 +61,18 @@ function eliminar_producto_carrito(id)
 	$.post(URL_BASE+'ventas/eliminar_producto_carrito',{id:id},function(data){
 		switch (data.res)
 		{
-			case 1: 
-				$("#example1").load();
-				break;
+			case 1:
+			{
+				$("#"+id).remove(); 
+				$("#total_venta").html('');
+				$("#total_venta").html(data.total);
+
+
+			}
+			break;
 			default:
 				alert('ocurrio un problema');
+				break;
 		}
 	},'json');
 }
@@ -125,7 +132,7 @@ function guardar_talle(i,id_producto,opcion)
 	var cantidad = $("#cantidad"+i).val();
 
 	$.post(URL_BASE+'productos/guardar_talle',{id_producto:id_producto,talle:talle,cantidad:cantidad},function(data){
-		switch(data)
+		switch(data.res)
 		{
 			case '1':
 				alert('Datos guardados correctamente');

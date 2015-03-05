@@ -45,7 +45,7 @@
                                         </thead>
                                         <tbody>
                                            <?foreach ($carrito['productos'] as $key => $value) :?>
-                                                <tr>
+                                                <tr id="<?=$value['id']?>">
                                                     <td><?=$value['codigo']?></td>
                                                     <td><?=$value['descripcion']?></td>
                                                     <td><?='Talle'//value['talle']?></td>
@@ -66,7 +66,7 @@
                                                 <th>Sub Total</th>
                                                 <th> Eliminar </th>
                                             </tr>
-                                            <tr> <th> </th> <th> </th> <th> </th> <th> </th> <th> </th><th> <h4> TOTAL DE LA VENTA: </h4></th>  <th><h4>$ <?=$total?></h4> </th> </tr>
+                                            <tr> <th> </th> <th> </th> <th> </th> <th> </th> <th> </th><th> <h4> TOTAL DE LA VENTA: </h4></th>  <th><h4 id="total_venta">$ <?=$total?></h4> </th> </tr>
                                         </tfoot> 
                                     </table>
                                     </div><!-- /.box-body -->

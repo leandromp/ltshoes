@@ -50,7 +50,7 @@
 			{
 				$sql="select p.id idproducto, rt.id as relacionid , t.id as talle_id, rt.cantidad, t.numero from producto p 
 						inner join relacion_talle rt on (p.id = rt.id_producto)
-						inner join talle t on (t.id=rt.id_talle and t.numero=".$talle.")
+						inner join talle t on (t.id=rt.id_talle and t.numero='".$talle."')
 						and p.id=".$producto_id;
 				$query = $this->db->query($sql);
 				if($query->num_rows()==1)

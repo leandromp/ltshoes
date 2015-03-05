@@ -189,11 +189,11 @@
 			 			{
 			 				$carrito = $this->session->userdata("carrito");
 			 				foreach ($carrito['productos'] as $key => $value) {
+			 					
 			 					if ($id == $value['id'])
-			 					{
 			 						unset($carrito['productos'][$key]);
-
-			 					}
+			 					else
+			 						$res['total']+=$carrito['productos'][$key]['precio']*$carrito['productos'][$key]['cantidad'];
 			 				}
 			 				$this->session->set_userdata("carrito",$carrito);
 			 				$res['cantidad']=count($carrito['productos']);
