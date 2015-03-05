@@ -26,6 +26,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Codigo</th>
+                                                <th>Fabricante</th>
                                                 <th>descripcion</th>
                                                 <th>precio</th>
                                                 <th>tipo</th>
@@ -38,6 +39,7 @@
                                            <?foreach ($productos as $key => $value) :?>
                                                 <tr>
                                                     <td><?=$value['codigo']?></td>
+                                                    <td><?=$value['fabricante']?></td>
                                                     <td><?=$value['descripcion']?></td>
                                                     <td><?=$value['precio']?></td>
                                                     <td><?=$value['tipo']?></td>
@@ -49,6 +51,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Codigo</th>
+                                                <th>Fabricante</th>
                                                 <th>descripcion</th>
                                                 <th>precio</th>
                                                 <th>tipo</th>

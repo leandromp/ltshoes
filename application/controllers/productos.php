@@ -9,12 +9,13 @@
 				{
 					
 					$this->load->model("empleado","empleado",true);
+					$this->load->model("configuracion","configuracion",TRUE);
 					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
 					$this->load->library('menu');
 			 		$variables['menu'] = $this->menu->dame_menu();
 			 		if ($permisos['consulta']==1)
 			 		{
-
+			 			$variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
 			 			$variables['nombre_pagina'] = $this->uri->segment(1);
 				 		$this->load->model("producto","producto",true);
 				 		$variables['productos']=$this->producto->listado();
@@ -51,7 +52,7 @@
 						else
 						{
 							$error=0;
-							$datos["marca"] = $this->input->post("marca");
+							//$datos["marca"] = $this->input->post("marca");
 							$datos["codigo"] = $this->input->post("codigo");
 							$datos["tipo"] = $this->input->post("tipo");
 							$datos["descripcion"] = $this->input->post("descripcion");
@@ -70,7 +71,7 @@
 							{
 								$resultado=$this->producto->insert($datos);
 								if($resultado==true)
-								$variables['error'] = 'Los datos fueron ingresados correctamente';
+								$variables['mensaje'] = 'Los datos fueron ingresados correctamente';
 								else
 								$variables['error'] = 'hubo un error al intentar actualizar la Base de Datos';		
 							}
@@ -79,7 +80,7 @@
 							
 						}
 						$this->load->model('configuracion','configuracion',TRUE);
-			 			$variables['tipo_productos']= $variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
+			 			$variables['tipo_productos'] = $this->configuracion->getVariosCodigo(3);
 						$variables['vista']="form-inc";
 						$this->index($variables);
 					}
@@ -122,7 +123,7 @@
 								{
 									$error=0;
 									$id=$this->input->post("id");
-									$datos["marca"] = $this->input->post("marca");
+									//$datos["marca"] = $this->input->post("marca");
 									$datos["codigo"] = $this->input->post("codigo");
 									$datos["tipo"] = $this->input->post("tipo");
 									$datos["descripcion"] = $this->input->post("descripcion");

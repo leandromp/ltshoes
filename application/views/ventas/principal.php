@@ -25,9 +25,9 @@
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Documento</th>
+                                                <th>Fecha</th>
+                                                <th>Monto</th>
+                                                <th>Cliente</th>
                                                 <th>Telefono</th>
                                                 
                                                 <th>Eliminar</th>
@@ -47,9 +47,9 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Documento</th>
+                                                <th>Fecha</th>
+                                                <th>Monto</th>
+                                                <th>Cliente</th>
                                                 <th>Telefono</th>
                                                 
                                                 <th>Eliminar</th>
