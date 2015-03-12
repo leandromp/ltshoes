@@ -83,8 +83,17 @@
                         </div>
                      </div>
                      <div class="box-footer">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                             <form action="<?=site_url('ventas/guardar_compra');?>" method="post">
+                            <div class="form-group">
+                                        <label>Fecha:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input id="desde" type="text" name="fecha" class="form-control" id="fecha" />
+                                        </div><!-- /.input group -->
+                            </div><!-- /.form group -->
                             <label> Seleccione el Metodo de pago </label>
                             <select name="opcion-pago" class="form-control">
                                 <option value="0"> Solo Guardar </option>

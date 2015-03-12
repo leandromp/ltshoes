@@ -19,6 +19,21 @@
 					return false;
 			}
 
+			public function delete($venta_id)
+			{
+				$this->db->where('id',$venta_id);
+				if($this->db->delete("venta"))
+				{
+					//$this->db->where('id_venta',$venta_id);
+					//if($this->db->delete("detalle_venta"))
+						return TRUE;
+					//else
+					//	return FALSE;
+				}
+				else
+					return FALSE;
+			}
+
 			public function insertLVenta($datos)
 			{
 				if($this->db->insert("detalle_venta",$datos))

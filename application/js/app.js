@@ -13,9 +13,7 @@ function eliminar (id,controlador)
 				break;
 			case '2':
 				alert("hubo un error al intentar ejecutar la accion, avise al administrador del sistema");
-				break;
-
-				
+				break;				
 		}
 	});
 }

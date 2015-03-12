@@ -286,7 +286,11 @@
 							foreach ($carrito['productos'] as $key => $value) {
 								$total_compra+=$value['precio']*$value['cantidad'];
 							}
-							$datos_venta['fecha'] = $fecha=date("Y-m-d");
+							if($this->input->post('fecha')=="")
+								$datos_venta['fecha'] = $fecha=date("Y-m-d");
+							else
+								$datos_venta['fecha'] = $this->input->post('fecha');
+							
 							$datos_venta['monto'] = $total_compra;
 							$datos_venta['id_cliente'] = $carrito['cliente']['id'];
 							$datos_venta['id_empleado'] = $this->input->post("empleado");
@@ -457,8 +461,7 @@
 
 			 			
 			 			$this->index($variables);
-			 		
-			 			//$this->venta->insertOPago();
+
 			 		}
 			 		else
 			 		$variables['error'] = "no tiene permisos para realizar la accion";
@@ -475,6 +478,34 @@
 			$this->load->model('venta','venta',TRUE);
 			$cantidad = $this->venta->getCantidadById($producto_id,$talle);
 			echo $cantidad;
+		}
+
+		public function eliminar()
+		{
+			$user=$this->session->userdata("ltshoes");
+				if ($user['usuario_id']>0)
+				{
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],20);
+			 		if ($permisos['baja']==1)
+			 		{
+			 			$venta_id=$this->input->post('id');
+			 			$this->load->model('venta','venta',TRUE);
+			 			if($venta_id>0)
+			 			{
+			 				if($this->venta->delete($venta_id))
+			 					echo '1';
+			 				else
+			 					echo 2;
+			 			}
+			 			else
+			 				echo 3;
+
+			 		}
+
+				}
+				else
+					header('location:'.site_url());
 		}
 
 }
