@@ -24,35 +24,22 @@
                         </div>
                     </div><!-- termina el titulo -->
                 </div>
-                    <div class="box-body">
+                   
                         <?foreach ($planes as $key => $value) :?>
-                             <div class="box box-success collapsed-box">
+                        <div class="col-md-3">
+                            <div class="box box-success collapsed-box">
                                 <div class="box-header" data-toggle="tooltip" title="Header tooltip">
-                                    <h3 class="box-title">Opcion de Pago Nº <?=$value['id']?></h3>
+                                    <h3 class="box-title">Venta Nº <?=$value['id_venta']?> | <?=$value['fecha']?></h3>
                                     <div class="box-tools pull-right">
                                         <a href="<?=site_url('ccorrientes/ver_detalle_plan/'.$value['id'].'/'.$cliente['id']);?>" class="btn btn-success"><i class="fa fa-arrow-right"></i></a>
-                                        
                                     </div>
                                 </div>
-                               
-                                
-
-                                    <?php /*foreach ($value['detalle_pp'] as $k => $v): ?>                             
-                                        <tr>
-                                            <td> <?=$v['monto']?> </td>
-                                            <td> <?=$v['fecha_vencimiento']?> </td>
-                                            <td> <?=$v['fecha_pago']?> </td>
-                                            <td> <a onclick="cancelar_pago(<?=$v['id']?>)" class="btn btn-success btn-flat">Cancelar</a>  </td>
-                                        </tr>
-                                    
-                                    
-                                   <?php endforeach */?>
-                          
-                                
-                            </div><!-- /.box -->
-                       
+                            </div>
+                        </div>
                         <?endforeach;?>
-                    </div>
+
+                
+                   
             </div> <!-- termina la declaracion del box -->
         </section>
                     

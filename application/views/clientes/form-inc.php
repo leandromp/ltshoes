@@ -90,7 +90,10 @@
                                 </select>
                             </div>
                        </div>
-
+                       <div style="visibility:hidden;height:1px;" class="form-group">
+                                <label>limpiador</label>
+                                <input id="direccion" class="form-control" type="text" name="direccion">
+                            </div>  
                        <div class="box-footer">
                       <button class="btn btn-primary"  type="submit">Enviar</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>

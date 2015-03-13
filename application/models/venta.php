@@ -4,8 +4,8 @@
 	
 			public function listado()
 			{	
-				$sql="SELECT * FROM venta v
-					INNER JOIN cliente c ON v.id_cliente=c.id ";
+				$sql="SELECT v.fecha,v.monto,c.nombre,c.apellido,c.telefono FROM venta v
+					INNER JOIN cliente c ON v.id_cliente=c.id ORDER BY fecha DESC ";
 				$query=$this->db->query($sql);
 				$resultado=$query->result_array();
 				return $resultado;

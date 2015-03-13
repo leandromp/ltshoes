@@ -22,7 +22,7 @@
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
                                 <? if($ventas): ?>
-                                    <table id="example1" class="table table-bordered table-hover">
+                                    <table id="example1" class="table table-bordered table-striped dataTable">
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
@@ -37,7 +37,7 @@
                                            <?foreach ($ventas as $key => $value) :?>
                                                 <tr>
                                                     <? $temp = explode('-',$value['fecha']); ?>
-                                                    <td><?=$temp[2].'/'.$temp[1].'/'.$temp[0]?></td>
+                                                    <td><?=$temp[2].'-'.$temp[1].'-'.$temp[0]?></td>
                                                     <td><?=$value['monto']?></td>
                                                     <td><?=$value['nombre'].''.$value['apellido']?></td>
                                                     <td><?=$value['telefono']?></td>

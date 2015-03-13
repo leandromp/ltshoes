@@ -44,7 +44,7 @@
 							</td>
 					    </tr>                                                      
 					 <?php endforeach ?>
-					 <tr>  <td> <b>Total adeudado:</b> <td> <?= $total_adeudado;?> </td> <td> <b>Total Pagado:</b> </td> <td> <?=$total_pagado?> </td> </tr>
+					 <tr>  <td> <b>Total:</b> <td> <?= $total_adeudado;?> </td> <td> <b>Pagado:</b> </td> <td> <?=$total_pagado?> </td> <td>Deuda:</td> <td> <?= $temp=$total_adeudado-$total_pagado?> </td></tr>
 					 </table>
 				</div>
 				<div class="box box-footer">

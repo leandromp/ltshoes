@@ -50,13 +50,10 @@
                                 <label for="exampleInputEmail1">Precio</label>
                                 <input id="precio" class="form-control" type="text" name="precio" value="<? if(isset($producto)) echo $producto['precio'];?>" >
                             </div>
-
-                        
-                       </div>
                       <div class="box-footer">
                       <button class="btn btn-primary" type="submit">Enviar</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
-                      <? if(isset($mensaje)): ?>
+                          <? if(isset($mensaje) and $mensaje!=""): ?>
                                 <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
                             <? endif ?>
                             <?if(isset($error)): ?>
