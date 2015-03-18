@@ -494,7 +494,7 @@
 			 			if($venta_id>0)
 			 			{
 			 				if($this->venta->delete($venta_id))
-			 					echo '1';
+			 					echo 1;
 			 				else
 			 					echo 2;
 			 			}

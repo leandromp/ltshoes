@@ -31,7 +31,7 @@
                                 <div class="box-header" data-toggle="tooltip" title="Header tooltip">
                                     <h3 class="box-title">Venta Nº <?=$value['id_venta']?> | <?=$value['fecha']?></h3>
                                     <div class="box-tools pull-right">
-                                        <a href="<?=site_url('ccorrientes/ver_detalle_plan/'.$value['id'].'/'.$cliente['id']);?>" class="btn btn-success"><i class="fa fa-arrow-right"></i></a>
+                                        <a href="<?=site_url('ccorrientes/ver_detalle_plan/'.$value['id'].'/'.$cliente['id']);?>" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,7 @@
 	
 			public function listado()
 			{	
-				$sql="SELECT v.fecha,v.monto,c.nombre,c.apellido,c.telefono FROM venta v
+				$sql="SELECT v.id,v.fecha,v.monto,c.nombre,c.apellido,c.telefono FROM venta v
 					INNER JOIN cliente c ON v.id_cliente=c.id ORDER BY fecha DESC ";
 				$query=$this->db->query($sql);
 				$resultado=$query->result_array();
@@ -23,13 +23,7 @@
 			{
 				$this->db->where('id',$venta_id);
 				if($this->db->delete("venta"))
-				{
-					//$this->db->where('id_venta',$venta_id);
-					//if($this->db->delete("detalle_venta"))
 						return TRUE;
-					//else
-					//	return FALSE;
-				}
 				else
 					return FALSE;
 			}
@@ -85,6 +79,16 @@
 					return TRUE;
 				else
 					return FALSE;
+			}
+
+			public function deleteDetalleVenta($venta_id)
+			{
+				$this->db->where('id_venta',$venta_id);
+				if($this->db->delete("detalle_venta"))
+					return TRUE;
+				else
+					return FALSE;
+
 			}
 	
 	}

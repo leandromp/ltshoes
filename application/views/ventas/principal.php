@@ -13,7 +13,7 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                    <div class="md-col-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Nueva <?=$this->uri->segment(1)?> </button> </a> </div>
+                    <div class="md-col-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> <i class="fa fa-plus-square"> </i> Nueva <?=$this->uri->segment(1)?> </button> </a> </div>
                     <br>
                     
                     <div class="box">
