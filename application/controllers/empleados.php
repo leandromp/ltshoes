@@ -38,6 +38,12 @@
 
 		}
 
+		public function cerrar_sesion()
+		{
+			$this->session->sess_destroy();
+			header('location:'.site_url());
+		}
+
 		
 }
 	

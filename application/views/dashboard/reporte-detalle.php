@@ -34,4 +34,4 @@
             </tfoot>
         </table>
         <? //endif; ?>
-    </div><!-- /.box-body -->
+    <!--</div><!-- /.box-body -->

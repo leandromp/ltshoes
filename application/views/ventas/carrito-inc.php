@@ -14,12 +14,10 @@
                <!-- Main content -->
                 <section class="content">
                    <section class="col-md-12">
-                        <div class="col-md-1"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Cambiar Cliente </button> </a> </div>
-                        <div class="col-md-10">
-                        <?//print_r($carrito)?>
+                        <div class="col-md-3"><a href="<?=site_url($modulo_nombre.'/alta/1')?>"> <button type="button" class="btn btn-success btn-flat"> Cambiar Cliente </button> </a> </div>
+                        <div class="col-md-8">
                             <a href=""> 
                                 <button type="button" class="btn btn-app"> 
-                                    
                                     <i class="fa fa-user"> </i>  <?=$cliente['nombre']?> 
                                 </button> 
                             </a> 
@@ -28,7 +26,7 @@
                             <a href="<?=site_url('ventas/ver_carrito')?>"> 
                                 <button type="button" class="btn btn-app"> 
                                     <span id="cantidad-productos" class="badge bg-yellow"></span>
-                                    <i class="fa fa-shopping-cart"> </i>Ver Carrito 
+                                    <i class="fa fa-credit-card"> </i>Ver Venta 
                                 </button> 
                             </a> 
                         </div>

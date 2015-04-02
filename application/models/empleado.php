@@ -18,7 +18,8 @@
 
 		public function comprobarLogeo($nombre,$password)
 		{
-			$query=$this->db->get_where('empleado',array('nombre'=>$nombre,'password'=>$password));
+			$sql = "SELECT * FROM empleado WHERE nombre='".$nombre."' AND password=MD5('".$password."')";
+			$query=$this->db->query($sql);
 			$resultado = $query->result_array();
 			$cant = count($resultado);
 			if($cant==1)
