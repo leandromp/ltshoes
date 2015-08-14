@@ -228,7 +228,7 @@
 					//print_r($resultado); 
 					if ($resultado['cantidad']>0)
 					{
-						$cantidad=$resultado['cantidad']+$datos['cantidad'];
+						$cantidad=$datos['cantidad'];//$resultado['cantidad']+ le saque esto por que sumaba
 						$this->talle->updateTalle($id_producto,$resultado['id_talle'],$cantidad);
 					}
 					else
@@ -255,6 +255,22 @@
 					echo 2;
 			}
 
+			public function agregar_outlet()
+			{
+				$producto_id = $this->input->post("producto_id");
+				$temporada = $this->input->post("temporada");
+				$this->load->model('producto','producto',true);
+				if($producto_id!=0 and $temporada!=0)
+				{
+					if($this->producto->outlet($producto_id,$temporada))
+						echo 'ok';
+					else
+						echo 'db_error';
+				}
+				else
+					echo 'error_datos';
+				
+			}
 	
 	}
 	

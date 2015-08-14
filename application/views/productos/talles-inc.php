@@ -28,6 +28,7 @@
                                                 <tr>
                                                     <th>Talle</th>
                                                     <th>cantidad</th>
+                                                    <th>Agregar al outlet </th>
                                                     <th>Guardar</th>
                                                     <th>Eliminar</th>
                                                     
@@ -36,10 +37,18 @@
                                             <tbody>
                                             <? if($talles): ?>
                                                <?foreach ($talles as $key => $value) :?>
-                                                    <tr id="filaA<?=$value['id']?>">
-                                                        <td id="talleA<?=$value['id'];?>"> <?=$value['numero']?></td>
-                                                        <td><input id="cantidadA<?=$value['id']?>" value="<?=$value['cantidad']?>"> </td>
-                                                        <td><button role="button" class="btn btn-info" onclick="guardar_talle('A<?=$value['id']?>',<?=$producto['id']?>,0)"> Guardar </button> </td>
+                                                    <tr id="fila<?=$value['id']?>">
+                                                        <td id="talle<?=$value['id'];?>"> <?=$value['numero']?></td>
+                                                        <td><input id="cantidad<?=$value['id']?>" value="<?=$value['cantidad']?>"> </td>
+                                                        <td><button role="button" class="btn btn-info" onclick="agregar_outlet(<?=$producto['id']?>)"> Outlet </button> 
+                                                            
+                                                                <select id="temporada-<?=$producto['id']?>">
+                                                                    <option value="1">Otoño / Invierno</option>
+                                                                    <option value="2">Primavera / Verano</option>
+                                                                </select>
+                                                            
+                                                        </td>
+                                                        <td><button role="button" class="btn btn-info" onclick="guardar_talle('<?=$value['id']?>',<?=$producto['id']?>,0)"> Guardar </button> </td>
                                                         <td><button role="button" class="btn btn-danger" onclick="eliminar_talle_id('<?=$value['id']?>')"> Eliminar </button> </td>
                                                     </tr>
                                                 <?endforeach;?>
@@ -49,6 +58,7 @@
                                                 <tr>
                                                     <th>Talle</th>
                                                     <th>cantidad</th>
+                                                    <th>Agregar al outlet </th>
                                                     <th>Guardar</th>
                                                     <th>Eliminar</th>
                                                 </tr>
@@ -70,3 +80,23 @@
                             
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
+
+        <div class="modal fade" id="myModal<?=$v['id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="
+                true">&times;</span><span class="sr-only">Close</span></button>
+
+                <h4 class="modal-title" id="myModalLabel">Cancelar Pago <?=$v['id']?></h4>
+              </div>
+              <div class="modal-body">
+                <div class="mensaje"> </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button onclick="cancelar_pago(<?=$v['id']?>)" type="button" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>

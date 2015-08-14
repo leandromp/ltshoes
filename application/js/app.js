@@ -90,7 +90,7 @@ function agregar_talle(producto_id,i)
 		});
 		
 		 select = select + '</select>'
-		$("#example1").append('<tr id="fila'+i+'"><td>'+select+'</td><td><input id="cantidad'+i+'" name="combo'+i+'" value="0"> </td><td><button role="button" class="btn btn-info" onclick="guardar_talle('+i+','+producto_id+',1)"> Guardar </button> </td><td><button role="button" class="btn btn-danger" onclick="eliminar_talle('+i+')"> Eliminar </button> </td></tr>');
+		$("#example1").append('<tr id="fila'+i+'"><td>'+select+'</td><td><input id="cantidad'+i+'" name="combo'+i+'" value="0"> </td><td></td><td><button role="button" class="btn btn-info" onclick="guardar_talle('+i+','+producto_id+',1)"> Guardar </button> </td><td><button role="button" class="btn btn-danger" onclick="eliminar_talle('+i+')"> Eliminar </button> </td></tr>');
 		$("#agregar_linea").html('<button onclick="agregar_talle('+producto_id+','+i+')" type="button" class="btn btn-success btn-flat"> Agregar Talle </button>')
 	},'json');
 
@@ -124,6 +124,7 @@ function guardar_talle(i,id_producto,opcion)
 
 	if(opcion==0)
 		var talle = $("#talle"+i).text();
+
 	else
 		var talle = $("#talle"+i).val();
 
@@ -289,5 +290,14 @@ function agregar_opcion()
 				},3000);
 				break;
 			}
+	});
+}
+
+function agregar_outlet(producto_id)
+{
+	var temporada = $("#temporada-"+producto_id).val();
+	
+	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,temporada:temporada}, function(data) {
+		
 	});
 }

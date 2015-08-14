@@ -65,6 +65,15 @@
 				return $resultado;
 
 			}
+
+			public function outlet($id_producto,$temporada)
+			{
+				$this->db->where('id',$id_producto);
+				if($this->db->update('producto',array('outlet'=>1,'temporada'=>$temporada)))
+					return true;
+				else
+					return false;
+			}
 		
 		}
 		

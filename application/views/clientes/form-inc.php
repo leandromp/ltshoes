@@ -95,7 +95,7 @@
                                 <input id="direccion" class="form-control" type="text" name="direccion">
                             </div>  
                        <div class="box-footer">
-                      <button class="btn btn-primary"  type="submit">Enviar</button> 
+                      <button class="btn btn-primary" id="enviar_cliente" type="submit">Guardar</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
                       </div>
                             <? if(isset($mensaje)): ?>
