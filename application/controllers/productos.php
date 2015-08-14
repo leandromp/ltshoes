@@ -271,6 +271,28 @@
 					echo 'error_datos';
 				
 			}
+
+			public function ver_outlet()
+			{
+				$user=$this->session->userdata("ltshoes");
+				if($user['usuario_id']>0)
+				{
+					$this->load->model("empleado","empleado",true);
+					$permisos=$this->empleado->getPermisos($user['usuario_id'],19);
+					if($permisos['modificacion']==1)
+					{
+						$this->load->model('producto','producto',true);
+						$variables['productos_outlet'] = $this->producto->getOutlet();
+						$variables['vista']='outlet';
+						$this->index($variables);
+					}
+					else
+					echo 'no tiene permisos para usar este modulo';
+				}
+				else
+					header('location:'.site_url());
+			}
+
 	
 	}
 	

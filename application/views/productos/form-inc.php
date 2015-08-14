@@ -43,7 +43,7 @@
                                 <label for="">Tipo</label>
                                 <select id="tipo" name="tipo" class="form-control">
                                   <? foreach ($tipo_productos as $key => $value) : ?>
-                                      <option <? if($value['nombre']==$producto['tipo']) echo 'selected' ?> ><?= $value['nombre'] ?></option>
+                                      <option <? if($value['nombre']==$producto['tipo']) echo 'selected=selected' ?> ><?= $value['nombre'] ?></option>
                                   <? endforeach; ?>
                                 </select>
                             <div class="  form-group">
@@ -51,7 +51,7 @@
                                 <input id="precio" class="form-control" type="text" name="precio" value="<? if(isset($producto)) echo $producto['precio'];?>" >
                             </div>
                       <div class="box-footer">
-                      <button class="btn btn-primary" type="submit">Enviar</button> 
+                      <button class="btn btn-primary" type="submit">Guardar</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
                           <? if(isset($mensaje) and $mensaje!=""): ?>
                                 <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>

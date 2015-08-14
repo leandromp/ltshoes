@@ -60,7 +60,7 @@
                                                     <th>cantidad</th>
                                                     <th>Agregar al outlet </th>
                                                     <th>Guardar</th>
-                                                    <th>Eliminar</th>
+                                                    <th>Quitar del outlet</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
