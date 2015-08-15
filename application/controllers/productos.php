@@ -258,11 +258,12 @@
 			public function agregar_outlet()
 			{
 				$producto_id = $this->input->post("producto_id");
+				$talle_id = $this->input->post("talle_id");
 				$temporada = $this->input->post("temporada");
 				$this->load->model('producto','producto',true);
-				if($producto_id!=0 and $temporada!=0)
+				if($producto_id!=0 and $temporada!=0 and $talle_id!=0)
 				{
-					if($this->producto->outlet($producto_id,$temporada))
+					if($this->producto->outlet($producto_id,$talle_id,$temporada))
 						echo 'ok';
 					else
 						echo 'db_error';
@@ -283,7 +284,7 @@
 					{
 						$this->load->model('producto','producto',true);
 						$variables['productos_outlet'] = $this->producto->getOutlet();
-						$variables['vista']='outlet';
+						$variables['vista']='outlet-inc';
 						$this->index($variables);
 					}
 					else

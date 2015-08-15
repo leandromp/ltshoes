@@ -36,11 +36,16 @@
                                             </thead>
                                             <tbody>
                                             <? if($talles): ?>
-                                               <?foreach ($talles as $key => $value) :?>
-                                                    <tr id="fila<?=$value['id']?>">
-                                                        <td id="talle<?=$value['id'];?>"> <?=$value['numero']?></td>
-                                                        <td><input id="cantidad<?=$value['id']?>" value="<?=$value['cantidad']?>"> </td>
-                                                        <td><button role="button" class="btn btn-info" onclick="agregar_outlet(<?=$producto['id']?>)"> Outlet </button> 
+                                               <?foreach ($talles as $key => $talle) :?>
+                                                    <tr id="fila<?=$talle['id']?>">
+                                                        <td id="talle<?=$talle['id'];?>"> <?=$talle['numero']?>
+                                                            <? if($talle['outlet']==1):?>
+                                                                <span style="color:#f56954" class="fa fa-tag"> </span>
+                                                            <? endif; ?>
+                                                        </td>
+
+                                                        <td><input id="cantidad<?=$talle['id']?>" value="<?=$talle['cantidad']?>"> </td>
+                                                        <td><button role="button" class="btn btn-info" onclick="agregar_outlet(<?=$producto['id']?>,<?=$talle['id_talle']?>)"> Outlet </button> 
                                                             
                                                                 <select id="temporada-<?=$producto['id']?>">
                                                                     <option value="1">Otoño / Invierno</option>
@@ -48,8 +53,8 @@
                                                                 </select>
                                                             
                                                         </td>
-                                                        <td><button role="button" class="btn btn-info" onclick="guardar_talle('<?=$value['id']?>',<?=$producto['id']?>,0)"> Guardar </button> </td>
-                                                        <td><button role="button" class="btn btn-danger" onclick="eliminar_talle_id('<?=$value['id']?>')"> Eliminar </button> </td>
+                                                        <td><button role="button" class="btn btn-info" onclick="guardar_talle('<?=$talle['id']?>',<?=$producto['id']?>,0)"> Guardar </button> </td>
+                                                        <td><button role="button" class="btn btn-danger" onclick="eliminar_talle_id('<?=$talle['id']?>')"> Eliminar </button> </td>
                                                     </tr>
                                                 <?endforeach;?>
                                              <? endif; ?>

@@ -66,11 +66,12 @@
 
 			}
 
-			public function outlet($id_producto,$temporada)
+			public function outlet($id_producto,$id_talle,$temporada)
 			{
 
-				$this->db->where('id',$id_producto);
-				if($this->db->update('producto',array('outlet'=>1,'temporada'=>$temporada)))
+				$this->db->where('id_producto',$id_producto);
+				$this->db->where('id_talle',$id_talle);
+				if($this->db->update('relacion_talle',array('outlet'=>1,'temporada'=>$temporada)))
 					return true;
 				else
 					return false;
@@ -78,8 +79,11 @@
 
 			public function getOutlet()
 			{
-				$this->db->where('outlet',1);
-				$query = $this->db->get('producto');
+				$sql="SELECT * FROM relacion_talle r 
+				INNER JOIN producto  p ON (r.id_producto=p.id) 
+				LEFT JOIN talle t ON (r.id_talle = t.id)
+				WHERE r.outlet=1";
+				$query = $this->db->query($sql);
 				$resultado=$query->result_array();
 				if (count($resultado)>0)
 					return $resultado;

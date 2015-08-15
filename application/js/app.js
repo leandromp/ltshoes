@@ -293,11 +293,11 @@ function agregar_opcion()
 	});
 }
 
-function agregar_outlet(producto_id)
+function agregar_outlet(producto_id,talle_id)
 {
 	var temporada = $("#temporada-"+producto_id).val();
 	
-	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,temporada:temporada}, function(data) {
-		
+	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,talle_id:talle_id,temporada:temporada}, function(data) {
+		alert(data);
 	});
 }
