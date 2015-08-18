@@ -92,11 +92,13 @@
                        </div>
                        <div style="visibility:hidden;height:1px;" class="form-group">
                                 <label>limpiador</label>
-                                <input id="direccion" class="form-control" type="text" name="direccion">
+                                <input id="nada" class="form-control" type="text" name="nada">
                             </div>  
                        <div class="box-footer">
                       <button class="btn btn-primary" id="enviar_cliente" type="submit">Guardar</button> 
+                      <a href="<?=site_url($modulo_nombre.'/alta/0/1')?>"> <button class="btn btn-primary" type="submmit"> Guardar y Vender </button> </a>
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
+
                       </div>
                             <? if(isset($mensaje)): ?>
                                 <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>

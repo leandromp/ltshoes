@@ -31,7 +31,7 @@
 
 			}
 
-			public function alta($id=0)
+			public function alta($id=0,$opcion=0)
 			{
 				$user=$this->session->userdata("ltshoes");
 				if($user['usuario_id']>0)
@@ -71,7 +71,13 @@
 								$resultado=$this->cliente->insert($datos);
 								if($resultado==true){
 									$variables['mensaje'] = 'Los datos fueron ingresados correctamente';
+									if($opcion>0)
 									header('location:'.site_url('clientes/index'));
+									else 
+									{
+										$id_nuevo=$this->db->insert_id();
+										header('location:'.site_url('ventas/seleccionar_cliente/'.$id_nuevo));
+									}
 								}
 								
 								else
