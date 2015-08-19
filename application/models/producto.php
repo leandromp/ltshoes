@@ -66,12 +66,12 @@
 
 			}
 
-			public function outlet($id_producto,$id_talle,$temporada)
+			public function outlet($id_producto,$id_talle,$temporada,$precio)
 			{
 
 				$this->db->where('id_producto',$id_producto);
 				$this->db->where('id_talle',$id_talle);
-				if($this->db->update('relacion_talle',array('outlet'=>1,'temporada'=>$temporada)))
+				if($this->db->update('relacion_talle',array('outlet'=>1,'temporada'=>$temporada,'precio_outlet'=>$precio)))
 					return true;
 				else
 					return false;

@@ -476,8 +476,10 @@
 			$talle=$this->input->post("talle");
 			$producto_id = $this->input->post("producto_id");
 			$this->load->model('venta','venta',TRUE);
-			$cantidad = $this->venta->getCantidadById($producto_id,$talle);
-			echo $cantidad;
+			$resultado = $this->venta->getCantidadById($producto_id,$talle);
+			$res['cantidad'] = $resultado[0]['cantidad'];
+			$res['precio_outlet'] = $resultado[0]['precio_outlet'];
+			echo json_encode($res);
 		}
 
 		public function eliminar()

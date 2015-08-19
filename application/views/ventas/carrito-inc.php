@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <td><?=$value['codigo']?></td>
                                                     <td><?=$value['descripcion']?></td>
-                                                    <td><?=$value['precio']?></td>
+                                                    <td><span id="precio-<?=$value['id']?>"> <?=$value['precio']?> </span></td>
                                                     <td><?=$value['tipo']?></td>
                                                     <td>
 

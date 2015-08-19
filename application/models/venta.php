@@ -47,12 +47,12 @@
 
 			public function getCantidadById($producto_id,$talle)
 			{
-				$sql="SELECT r.cantidad FROm relacion_talle r 
+				$sql="SELECT r.cantidad,r.precio_outlet FROm relacion_talle r 
 						INNER JOIN talle t on (r.id_talle=t.id and t.numero=".$talle.")
 						where r.id_producto=".$producto_id;
 				$query = $this->db->query($sql);
 				$resultado = $query->result_array();
-				return ($resultado[0]['cantidad'])	;
+				return ($resultado)	;
 			}
 
 			public function getCantidadRelacion($producto_id,$talle)

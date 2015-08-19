@@ -43,9 +43,10 @@
                                                                 <span style="color:#f56954" class="fa fa-tag"> </span>
                                                             <? endif; ?>
                                                         </td>
-
+                                                        <!-- Button trigger modal -->
+                                                      
                                                         <td><input id="cantidad<?=$talle['id']?>" value="<?=$talle['cantidad']?>"> </td>
-                                                        <td><button role="button" class="btn btn-info" onclick="agregar_outlet(<?=$producto['id']?>,<?=$talle['id_talle']?>)"> Outlet </button> 
+                                                        <td><button onclick="outlet_val(<?=$producto['id']?>,<?=$talle['id_talle']?>)" data-toggle="modal" data-target="#myModal" role="button" class="btn btn-info" > Outlet </button> 
                                                             
                                                                 <select id="temporada-<?=$producto['id']?>">
                                                                     <option value="1">Otoño / Invierno</option>
@@ -85,23 +86,29 @@
                             
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirmaci&oacute;n</h4>
+      </div>
+      <div class="modal-body">
+        Ingrese el nuevo precio del producto 
+        <div class="input-group col-md-6">
+            <span class="input-group-addon" id="basic-addon1">$</span>
+            <input type="text" class="form-control" id="precio-outlet">
+        </div> 
+            <input type="hidden" id="talle_id">
+            <input type="hidden" id="producto_id">
 
-        <div class="modal fade" id="myModal<?=$v['id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="
-                true">&times;</span><span class="sr-only">Close</span></button>
-
-                <h4 class="modal-title" id="myModalLabel">Cancelar Pago <?=$v['id']?></h4>
-              </div>
-              <div class="modal-body">
-                <div class="mensaje"> </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button onclick="cancelar_pago(<?=$v['id']?>)" type="button" class="btn btn-primary">Guardar Cambios</button>
-              </div>
-            </div>
-          </div>
-        </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" onclick="agregar_outlet()" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

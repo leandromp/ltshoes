@@ -212,8 +212,11 @@ function cambiar_cantidad(id_producto)
 	var nombre = '#talle-'+id_producto+' option:selected';
 	var talle = $(nombre).val();
 	$.post(URL_BASE+'ventas/mostrar_stock',{talle:talle,producto_id:id_producto},function(data){
-		
-		$("#stock-"+id_producto).html(data);
+		$("#stock-"+id_producto).html(data.cantidad);
+		if(data.precio_outlet>0){
+			$("#precio-"+id_producto).addClass('text-success')
+			$("#precio-"+id_producto).html(data.precio_outlet);
+		}
 	},'json');
 	//alert (talle);
 }
@@ -293,11 +296,20 @@ function agregar_opcion()
 	});
 }
 
-function agregar_outlet(producto_id,talle_id)
+function agregar_outlet()
 {
-	var temporada = $("#temporada-"+producto_id).val();
 	
-	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,talle_id:talle_id,temporada:temporada}, function(data) {
+	var producto_id = $("#producto_id").val();
+	var talle_id = $("#talle_id").val();
+	var temporada = $("#temporada-"+producto_id).val();
+	var precio = $("#precio-outlet").val();
+	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,talle_id:talle_id,temporada:temporada,precio:precio}, function(data) {
 		alert(data);
 	});
+}
+
+function outlet_val(producto_id,talle_id)
+{
+	$("#talle_id").val(talle_id);
+	$("#producto_id").val(producto_id);
 }
