@@ -479,6 +479,8 @@
 			$resultado = $this->venta->getCantidadById($producto_id,$talle);
 			$res['cantidad'] = $resultado[0]['cantidad'];
 			$res['precio_outlet'] = $resultado[0]['precio_outlet'];
+			if(!$res['precio_outlet'])
+				$res['precio_outlet']=$this->venta->getPrecioById($producto_id);
 			echo json_encode($res);
 		}
 

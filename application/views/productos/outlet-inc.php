@@ -5,6 +5,9 @@
         <?=strtoupper($modulo_nombre);?></h3> 
     </div>
 </div><!-- /.box-header -->
+<div class="col-lg-12"> 
+	<a target="_blank" href="<?=site_url('reportes/ver_reporte_outlet')?>"> <button> Imprimir reporte  </button> </a>
+</div>
 <div class="box-body table-responsive">
     <? if($productos_outlet): ?>
     <table id="example1" class="table table-bordered table-hover">

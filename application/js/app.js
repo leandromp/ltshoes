@@ -214,7 +214,6 @@ function cambiar_cantidad(id_producto)
 	$.post(URL_BASE+'ventas/mostrar_stock',{talle:talle,producto_id:id_producto},function(data){
 		$("#stock-"+id_producto).html(data.cantidad);
 		if(data.precio_outlet>0){
-			$("#precio-"+id_producto).addClass('text-success')
 			$("#precio-"+id_producto).html(data.precio_outlet);
 		}
 	},'json');

@@ -85,6 +85,20 @@ class Reporte extends CI_Model {
 			return FALSE;
 	}
 
+	public function getProductosOutlet()
+	{
+		$sql = "select p.descripcion, rt.precio_outlet , rt.cantidad , rt.temporada
+				from producto p
+				inner join relacion_talle rt on (p.id = rt.id_producto and rt.outlet=TRUE) ";
+
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		if ($query->num_rows()>0)
+			return $res;
+		else
+			return FALSE;
+	}
+
 }
 
 /* End of file reporte.php */

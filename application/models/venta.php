@@ -48,7 +48,7 @@
 			public function getCantidadById($producto_id,$talle)
 			{
 				$sql="SELECT r.cantidad,r.precio_outlet FROm relacion_talle r 
-						INNER JOIN talle t on (r.id_talle=t.id and t.numero=".$talle.")
+						INNER JOIN talle t on (r.id_talle=t.id and t.numero='".$talle."')
 						where r.id_producto=".$producto_id;
 				$query = $this->db->query($sql);
 				$resultado = $query->result_array();
@@ -89,6 +89,19 @@
 				else
 					return FALSE;
 
+			}
+
+			public function getPrecioById($producto_id)
+			{
+				$sql = "SELECT precio FROM producto where id=".$producto_id;
+				$query = $this->db->query($sql);
+				if($query->num_rows()>0)
+				{
+					$resultado=$query->result_array();
+					return $resultado[0]['precio'];
+				}
+				else 
+					return FALSE;
 			}
 	
 	}
