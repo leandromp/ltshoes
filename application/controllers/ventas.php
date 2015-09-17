@@ -348,6 +348,9 @@
 								$variables['opciones_pago']=$this->venta->getPPagos();
 								//print_r($variables);
 								$this->session->unset_userdata("carrito");
+								echo '<script type="text/javascript" language="javascript"> 
+								window.open('.site_url('reportes/imprimir_comprobante_pago/'.$id_venta).')
+								</script>';
 								$this->index($variables);
 							}
 							else

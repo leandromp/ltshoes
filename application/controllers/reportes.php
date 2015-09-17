@@ -97,6 +97,64 @@
 		$this->_pdf($html);
 	}
 
+	public function imprimir_comprobante_pago($id_venta)
+	{
+		$this->load->model('venta','venta',true);
+		$detalle_venta=$this->venta->getDetalleVentaById($id_venta);
+		$detalle_pagos=$this->venta->getDetallePagosById($id_venta);
+		$html= '<style>';
+		$html.='table {border: 1px solid #000; width:400px; font-size:10px}
+				tr td{width:105px;}
+				.pago{border:1px solid #000; width:100px;}
+				.detalle_titulo > td{width:630px; margin:15px; background-color:#e1e1e1;}
+				.productos > td{border:1px solid #000; width:157px;}';
+		$html.='</style>';
+		$html.='<table>';
+		//$html.='<tr> <td> Datos del Cliente </td> </tr>';
+		$html.='<tr>';
+			$html.='<td> Nombre :</td> <td> '.$detalle_venta[0]["nombre"].','.$detalle_venta[0]["apellido"].' </td>';
+			$html.='<td> Direccion :</td> <td> '.$detalle_venta[0]["direccion"].' </td>';
+			$html.='<td> Telefono :</td> <td> '.$detalle_venta[0]["telefono"].' </td>';
+		$html.="</tr><tr>";
+			$html.='<td> Direccion Laboral :</td> <td> '.$detalle_venta[0]["direccion_laboral"].' </td>';
+			$html.='<td> Telefono Laboral :</td> <td> '.$detalle_venta[0]["telefono_laboral"].' </td>';
+		$html.="</tr>";
+		$html.='<tr class="detalle_titulo"><td> Detalle de la Compra </td></tr>';
+		$html.='<tr class="productos"> <td> Descripcion </td><td> Precio </td> <td> Cantidad </td> <td> Subtotal </td> </tr>';
+		foreach ($detalle_venta as $key => $value) 
+		{
+			$html.='<tr class="productos">';
+			$html.='<td> '.$value['descripcion'].'</td>';
+			$html.='<td> '.$value['precio'].'</td>';
+			$html.='<td> '.$value['cantidad'].'</td>';
+			$html.='<td> '.$value['cantidad']*$value['precio'].'</td>';
+			$html.='</tr>';
+		}
+		$html.='<tr class="detalle_titulo"><td> Detalle de los pagos </td></tr>';
+		$html.='<tr>';
+		$i=0;
+		foreach ($detalle_pagos as $p => $dp) {
+			$i++;
+			if($i<=6)
+			{
+			$html.='<td class="pago"> Monto:<br><b>'.$dp['monto'].'</b><br>';
+			$html.='Fecha de pago:<br>'.$dp['fecha_vencimiento'].'<br>';
+			$html.='Firma:................ </td>';
+			}
+			else
+			{
+				$i=0;
+				$html.='</tr><tr>';
+			}
+			
+			
+		}
+		$html.='</tr>';
+		$html.='</table>';
+		//echo $html;
+		$this->_pdf($html);
+	}	
+
 	public function _pdf($html)
 	{
 		ini_set('memory_limit', '128M');

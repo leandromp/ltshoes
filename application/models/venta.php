@@ -103,6 +103,39 @@
 				else 
 					return FALSE;
 			}
+
+			public function getDetalleVentaById($venta_id)
+			{
+				$sql="select * from venta v 
+						inner join detalle_venta dv on (v.id=dv.id_venta)
+						left join producto p on (dv.id_producto=p.id)
+						left join cliente c on (v.id_cliente=c.id)
+						where v.id=".$venta_id;
+				$query = $this->db->query($sql);
+				if($query->num_rows()>0)
+				{
+					$resultado=$query->result_array();
+					return $resultado;
+				}
+				else 
+					return FALSE;
+			}
+
+			public function getDetallePagosById($venta_id)
+			{
+				$sql="select v.id,pp.id,dpp.* from venta v 
+					inner join plan_pago pp on (v.id=pp.id_venta)
+					left join detalle_plan_pago dpp on (pp.id = dpp.plan_pago_id)
+					where v.id=".$venta_id;
+				$query = $this->db->query($sql);
+				if($query->num_rows()>0)
+				{
+					$resultado=$query->result_array();
+					return $resultado;
+				}
+				else 
+					return FALSE;
+			}
 	
 	}
 	

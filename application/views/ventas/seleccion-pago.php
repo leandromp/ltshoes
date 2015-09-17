@@ -55,7 +55,7 @@
       <div class="box-footer">
         <button class="btn btn-primary" type="submit">Terminar Venta</button> 
         <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>
-        <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-alert" type="button"> Generar Ticket </button> </a>
+        <a target="_blank" href="<?=site_url('reportes/imprimir_comprobante_pago/'.$id_venta)?>"> <button class="btn btn-alert" type="button"> Generar Ticket </button> </a>
           <? if(isset($mensaje)): ?>
           <div class="alert alert-info alert-dismissable"> <?=$mensaje?> </div>
           <? endif ?>
