@@ -16,7 +16,7 @@
                 <th>Codigo</th>
                 <th>Fabricante</th>
                 <th>descripcion</th>
-                <th>precio</th>
+                <th>Precio Outlet</th>
                 <th>tipo</th>
                 <th>Talle</th>
             </tr>
@@ -27,7 +27,7 @@
                     <td><?=$value['codigo']?></td>
                     <td><?=$value['fabricante']?></td>
                     <td><?=$value['descripcion']?></td>
-                    <td><?=$value['precio']?></td>
+                    <td><?=$value['precio_outlet']?></td>
                     <td><?=$value['tipo']?></td>
                     <td><?=$value['numero']?></td>
             <?endforeach;?>

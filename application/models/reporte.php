@@ -87,9 +87,10 @@ class Reporte extends CI_Model {
 
 	public function getProductosOutlet()
 	{
-		$sql = "select p.descripcion, rt.precio_outlet , rt.cantidad , rt.temporada
+		$sql = "select p.descripcion, rt.precio_outlet , rt.cantidad , rt.temporada, t.numero as talle
 				from producto p
-				inner join relacion_talle rt on (p.id = rt.id_producto and rt.outlet=TRUE) ";
+				inner join relacion_talle rt on (p.id = rt.id_producto and rt.outlet=TRUE)
+				left join talle t on (rt.id_talle=t.id) ";
 
 		$query = $this->db->query($sql);
 		$res = $query->result_array();

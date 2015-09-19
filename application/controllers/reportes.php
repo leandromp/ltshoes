@@ -76,17 +76,24 @@
 	{
 		$this->load->model('reporte','reporte',TRUE);
 		$resultado = $this->reporte->getProductosOutlet();
+		$html= '<style>';
+		$html.='table{border: 1px solid #000; width:400px; font-size:10px}
+				tr td th {width:105px;border: 1px solid #000;}
+				.productos > td{border-bottom:1px solid #e6e6e6;}';
+		$html.='</style>';
+		$html.='<table>';
 		if($resultado)
 			{
-				$html='<table>';
-				$html.='<tr> <th> Descripcion </th> <th> Precio </th> <th> Cantidad </th> <th> Temporada </th></tr>';
+
+				$html.='<table>';
+				$html.='<tr> <th> Descripcion </th> <th> Talle </th> <th> Precio </th> <th> Cantidad </th>  <th> Temporada </th></tr>';
 				foreach ($resultado as $key => $value) 
 				{
 					if($value['temporada']==1)
 						$temporada='PRIMAVERA/VERANO';
 					else
 						$temporada=	'OTOÑO/INVIERNO';
-					$html.='<tr> <td> '.$value['descripcion'].'</td> <td>'.$value['precio_outlet'].'</td> <td>'.$value['cantidad'].'</td> <td>'.$temporada.'</td> </tr>';
+					$html.='<tr class="productos"> <td> '.$value['descripcion'].'</td><td>'.$value['talle'].'</td> <td>'.$value['precio_outlet'].'</td> <td>'.$value['cantidad'].'</td> <td>'.$temporada.'</td> </tr>';
 				
 				}
 					$html.='</table>';

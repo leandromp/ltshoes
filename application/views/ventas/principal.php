@@ -25,17 +25,19 @@
                             <table id="example1" class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
+                                    	<th>Venta Nº</th>
                                         <th>Fecha</th>
                                         <th>Monto</th>
                                         <th>Cliente</th>
                                         <th>Telefono</th>
-                                        
                                         <th>Eliminar</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                    <?foreach ($ventas as $key => $value) :?>
                                         <tr>
+                                        	<td><?=$value['id']?></td>
                                             <? $temp = explode('-',$value['fecha']); ?>
                                             <td><?=$temp[2].'-'.$temp[1].'-'.$temp[0]?></td>
                                             <td><?=$value['monto']?></td>
@@ -43,6 +45,7 @@
                                             <td><?=$value['telefono']?></td>
                                             
                                             <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
+                                             <td><a href="<?=site_url('reportes/imprimir_comprobante_pago/'.$value['id'])?>" target="_blank"><button role="button" class="btn" > <i class="fa fa-print"> </i> </button> </td></a>
                                     <?endforeach;?>
                                 </tbody>
                                 <tfoot>

@@ -103,7 +103,7 @@
             <input type="hidden" id="talle_id">
             <input type="hidden" id="producto_id">
 
-       
+       <div id="mensaje" style="display:none"> Producto Agregado al Outlet. </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

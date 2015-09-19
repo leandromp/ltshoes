@@ -303,7 +303,14 @@ function agregar_outlet()
 	var temporada = $("#temporada-"+producto_id).val();
 	var precio = $("#precio-outlet").val();
 	$.post(URL_BASE+'productos/agregar_outlet', {producto_id:producto_id,talle_id:talle_id,temporada:temporada,precio:precio}, function(data) {
-		alert(data);
+		if(data=='ok')
+			$("#mensaje").addClass('alert alert-success alert-dismissible');
+			$("#mensaje").show('2000');
+			setTimeout(function(){
+				$("#mensaje").hide('slow');
+			},3000);
+			
+
 	});
 }
 

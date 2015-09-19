@@ -2,13 +2,13 @@
         <script>
             var URL_BASE='<?=site_url();?>';
         </script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="<?=URL_BASE?>/js/jquery.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="<?=URL_BASE?>/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="<?=URL_BASE?>/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- Morris.js charts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="<?=URL_BASE?>/js/raphael-min.js"></script>
         <script src="<?=URL_BASE?>/js/plugins/morris/morris.min.js" type="text/javascript"></script>
         <!-- Sparkline -->
         <script src="<?=URL_BASE?>/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
