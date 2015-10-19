@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+﻿<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		
 		class Reportes extends CI_Controller {
 		
@@ -84,7 +84,6 @@
 		$html.='<table>';
 		if($resultado)
 			{
-
 				$html.='<table>';
 				$html.='<tr> <th> Descripcion </th> <th> Talle </th> <th> Precio </th> <th> Cantidad </th>  <th> Temporada </th></tr>';
 				foreach ($resultado as $key => $value) 
@@ -94,6 +93,7 @@
 					else
 						$temporada=	'OTOÑO/INVIERNO';
 					$html.='<tr class="productos"> <td> '.$value['descripcion'].'</td><td>'.$value['talle'].'</td> <td>'.$value['precio_outlet'].'</td> <td>'.$value['cantidad'].'</td> <td>'.$temporada.'</td> </tr>';
+
 				
 				}
 					$html.='</table>';
