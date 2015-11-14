@@ -22,7 +22,7 @@
                         </div><!-- /.box-header -->
                         <div class="box-body table-responsive">
                         <? if($ventas): ?>
-                            <table id="example1" class="table table-bordered table-striped dataTable">
+                            <table id="example1" class="table table-bordered table-striped dataTable"  data-order='[[ 1, "desc" ]]' >
                                 <thead>
                                     <tr>
                                     	<th>Venta Nº</th>

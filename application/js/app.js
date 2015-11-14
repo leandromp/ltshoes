@@ -9,7 +9,7 @@ function eliminar (id,controlador)
 				{
 					controlador='configuraciones'
 				}
-				window.location.href=URL_BASE+controlador;
+				$('#fila_'+id).hide();
 				break;
 			case '2':
 				alert("hubo un error al intentar ejecutar la accion, avise al administrador del sistema");
@@ -131,7 +131,7 @@ function guardar_talle(i,id_producto,opcion)
 	var cantidad = $("#cantidad"+i).val();
 
 	$.post(URL_BASE+'productos/guardar_talle',{id_producto:id_producto,talle:talle,cantidad:cantidad},function(data){
-		switch(data.res)
+		switch(data)
 		{
 			case '1':
 				alert('Datos guardados correctamente');

@@ -45,7 +45,7 @@
                                 </thead>
                                 <tbody>
                                    <?foreach ($productos as $key => $value) :?>
-                                        <tr>
+                                        <tr id="fila_<?=$value['id']?>" >
                                             <td><?=$value['codigo']?></td>
                                             <td><?=$value['fabricante']?></td>
                                             <td><?=$value['descripcion']?></td>
@@ -54,6 +54,7 @@
                                             <td><a href="<?=site_url($modulo_nombre.'/talles/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Talles </button> </a> </td>
                                             <td><a href="<?=site_url($modulo_nombre.'/editar/'.$value['id']);?>"> <button role="button" class="btn btn-default"> Editar </button> </a> </td>
                                             <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
+                                        </tr>   
                                     <?endforeach;?>
                                 </tbody>
                                 <tfoot>

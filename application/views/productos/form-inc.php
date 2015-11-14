@@ -50,6 +50,17 @@
                                 <label for="exampleInputEmail1">Precio</label>
                                 <input id="precio" class="form-control" type="text" name="precio" value="<? if(isset($producto)) echo $producto['precio'];?>" >
                             </div>
+
+                             <div class="form-group">
+                                        <label>Fecha de Ingreso:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" name="fecha_ingreso" class="form-control" id="fecha-nac" value="<? if(isset($producto)) echo $producto['fecha_ingreso'];?>"/>
+                                        </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+
                       <div class="box-footer">
                       <button class="btn btn-primary" type="submit">Guardar</button> 
                       <a href="<?=site_url($modulo_nombre)?>"> <button class="btn btn-danger" type="button"> Volver </button> </a>

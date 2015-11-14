@@ -58,6 +58,7 @@
 							$datos["descripcion"] = $this->input->post("descripcion");
 							$datos["precio"] = $this->input->post("precio");
 							$datos["fabricante"] = $this->input->post("fabricante");
+							$datos["fecha_ingreso"] = $this->input->post("fecha_ingreso");
 							//controlo que los datos no vengan vacios
 							foreach ($datos as $key => $value) 
 							{
