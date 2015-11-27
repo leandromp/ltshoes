@@ -28,10 +28,10 @@
 				return false;
 		}
 		
-		public function getPermisos($perfil_id,$modulo_id)
+		public function getPermisos($perfil_id,$accion)
 		{
 			$this->db->where("perfil_id",$perfil_id);
-			$this->db->where("modulo_id",$modulo_id);
+			$this->db->where("modulo_id",$accion);
 			$query=$this->db->get("permiso");
 			$resultado=$query->result_array();
 			if(count($resultado)>0)

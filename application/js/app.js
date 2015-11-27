@@ -319,3 +319,32 @@ function outlet_val(producto_id,talle_id)
 	$("#talle_id").val(talle_id);
 	$("#producto_id").val(producto_id);
 }
+
+/********************************************************************/
+// funcion para editar los campos de una tabla 
+
+function edit(p_id, p_campo,p_tabla)
+{
+	var id_fila = '#'+p_campo+'_'+p_id;
+	var texto = $(id_fila).html();
+	$(id_fila).removeAttr('ondblclick');
+	$(id_fila).html('');
+	$(id_fila).append('<input id="temp" type="text" value="'+texto+'"">');
+	$(id_fila).focusout(function(event) {
+		valor = ($("#temp").val());
+		$.post(URL_BASE+'genericos/update', {id:p_id, campo:p_campo, tabla:p_tabla, valor:valor}, function(data) {
+			switch(data)
+			{
+				case '1':
+					$(id_fila).html('');
+					$(id_fila).html(valor);
+					$(id_fila).attr('ondblclick','edit('+p_id+',"'+p_campo+'","'+p_tabla+'")');
+				break;
+			}
+			
+
+		});
+
+	});
+	
+}	
