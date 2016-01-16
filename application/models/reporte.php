@@ -100,6 +100,25 @@ class Reporte extends CI_Model {
 			return FALSE;
 	}
 
+	public function getClientesMoras()
+	{
+		$sql = "select 
+					dpp.plan_pago_id, dpp.fecha_vencimiento,
+				    pp.monto_cuota,pp.id_venta, pp.tipo,
+				    c.nombre, c.apellido, c.direccion
+				from detalle_plan_pago dpp
+				inner join plan_pago pp on (dpp.plan_pago_id=pp.id)
+				inner join venta v on (pp.id_venta = v.id)
+				inner join cliente c on (v.id_cliente=c.id)
+				 where dpp.fecha_vencimiento <= current_date()";
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		if ($query->num_rows()>0)
+			return $res;
+		else
+			return FALSE;
+	}
+
 }
 
 /* End of file reporte.php */

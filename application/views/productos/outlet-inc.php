@@ -2,11 +2,11 @@
 <section class="content">
 <div class="box-header" id="recargar">
     <div class="col-md-11"> <h3 class="box-title">
-        <?=strtoupper($modulo_nombre);?></h3> 
+        OUTLET
     </div>
 </div><!-- /.box-header -->
 <div class="col-lg-12"> 
-	<a target="_blank" href="<?=site_url('reportes/ver_reporte_outlet')?>"> <button> Imprimir reporte  </button> </a>
+	<a target="_blank" href="<?=site_url('reportes/ver_reporte_outlet')?>"> <button class="btn btn-default"> <i class="fa fa-print"> </i> Imprimir Listado de Productos  </button> </a><br>
 </div>
 <div class="box-body table-responsive">
     <? if($productos_outlet): ?>

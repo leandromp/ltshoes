@@ -79,16 +79,16 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                        <?= $cantidad_clientes ?>
+                                        
                                     </h3>
                                     <p>
-                                        Clientes
+                                        Cobranzas Dia de Hoy
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-group"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a target="_blank" href="<?=site_url('reportes/imprimir_moras')?>" class="small-box-footer">
                                     Ver mas informaci&oacute;n <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>

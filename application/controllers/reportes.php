@@ -1,4 +1,4 @@
-﻿<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		
 		class Reportes extends CI_Controller {
 		
@@ -69,6 +69,62 @@
 				$this->load->model("reporte","reporte",TRUE);
 				$variables['reporte'] = $this->reporte->getMora($fecha);
 				$this->load->view("dashboard/mora-detalle",$variables);
+			}
+
+			public function imprimir_moras()
+			{
+				$this->load->library('varios_library');
+				$this->load->model("reporte","reporte",TRUE);
+				$resultado = $this->reporte->getClientesMoras();
+
+				$html= '<style>';
+				$html.='table {border: 1px solid #000; width:400px; font-size:10px}
+						.normal{width:40px;}
+						.pago{border:1px solid #000; width:100px;}
+						.productos > td{border:1px solid #000; width:100px;}';
+				$html.='</style>';
+				$html.='<table>';
+				//$html.='<tr> <td> Datos del Cliente </td> </tr>';
+				$html.='<tr class="productos"> <td> Nombre </td><td> Direccion </td> <td> Fecha Vencimiento </td> <td width="50"> Monto </td>
+				 <td width="15"> TC </td> <td width="50"> Fecha Pago </td> <td width="50"> Monto Pago </td> <td width="60"> Firma </td> <td width="40"> I% </td><td width="30"> DA </td></tr>';
+				$i=0;
+				foreach ($resultado as $key => $value) 
+				{
+					$fecha_vencimiento=$this->varios_library->rotar_fecha($value['fecha_vencimiento']);
+					$html.='<tr class="productos">';
+					$html.='<td> '.$value['nombre'].' '.$value['apellido'].'</td>';
+					$html.='<td> '.$value['direccion'].'</td>';
+					$html.='<td> '.$fecha_vencimiento.'</td>';
+					$html.='<td width="50"> '.$value['monto_cuota'].'</td>';
+					
+					switch ($value['tipo']) {
+						case 2:
+							$html.='<td width="15"> M </td>';
+						break;
+						case 2:
+							$html.='<td width="15"> Q </td>';
+						break;
+						default:
+							$html.='<td width="15"> S </td>';
+						break;
+					}
+					$html.='<td width="50"> </td>';
+					$html.='<td width="50"> </td>';
+					$html.='<td width="60"> </td>';
+					$html.='<td width="40"> '.round($value['monto_cuota']*0.13).'</td>';
+					$html.='<td width="30">'.$this->varios_library->diasDiferencia(date('d-m-Y'),$fecha_vencimiento).' </td>';
+					$html.='</tr>';
+					$i++;
+					if($i==33)
+					{
+						$html.='<tr><td></td> </tr>';
+
+						$i=0;
+					}
+				}
+				$html.='</table>';
+
+				$this->_pdf($html);
 			}
 
 
