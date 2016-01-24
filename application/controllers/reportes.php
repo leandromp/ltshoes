@@ -76,6 +76,9 @@
 				$this->load->library('varios_library');
 				$this->load->model("reporte","reporte",TRUE);
 				$resultado = $this->reporte->getClientesMoras();
+				foreach ($resultado as $key => $r) {
+					$resultado[$key]['total_pagado'] = $this->reporte->pagadoByPlanPago($r['plan_pago_id']);
+				}
 
 				$html= '<style>';
 				$html.='table {border: 1px solid #000; width:400px; font-size:10px}
@@ -85,16 +88,17 @@
 				$html.='</style>';
 				$html.='<table>';
 				//$html.='<tr> <td> Datos del Cliente </td> </tr>';
-				$html.='<tr class="productos"> <td> Nombre </td><td> Direccion </td> <td> Fecha Vencimiento </td> <td width="50"> Monto </td>
-				 <td width="15"> TC </td> <td width="50"> Fecha Pago </td> <td width="50"> Monto Pago </td> <td width="60"> Firma </td> <td width="40"> I% </td><td width="30"> DA </td></tr>';
+				$html.='<tr class="productos"> <td> Nombre </td><td> Direccion </td> <td width="60"> Fecha Vencimiento </td> <td width="50"> Monto </td>
+				 <td width="15"> TC </td> <td width="50"> Fecha Pago </td> <td width="50"> Monto Pago </td> <td width="60"> Firma </td> 
+				 <td width="40"> I% </td><td width="30"> DA </td><td width="45"> Total P </td> <td width="45"> Total Deuda </td></tr>';
 				$i=0;
 				foreach ($resultado as $key => $value) 
 				{
-					$fecha_vencimiento=$this->varios_library->rotar_fecha($value['fecha_vencimiento']);
+					//$fecha_vencimiento=$this->varios_library->rotar_fecha($value['fecha_vencimiento']);
 					$html.='<tr class="productos">';
 					$html.='<td> '.$value['nombre'].' '.$value['apellido'].'</td>';
 					$html.='<td> '.$value['direccion'].'</td>';
-					$html.='<td> '.$fecha_vencimiento.'</td>';
+					$html.='<td width="60"> '.$value['fecha_vencimiento'].'</td>';
 					$html.='<td width="50"> '.$value['monto_cuota'].'</td>';
 					
 					switch ($value['tipo']) {
@@ -112,7 +116,9 @@
 					$html.='<td width="50"> </td>';
 					$html.='<td width="60"> </td>';
 					$html.='<td width="40"> '.round($value['monto_cuota']*0.13).'</td>';
-					$html.='<td width="30">'.$this->varios_library->diasDiferencia(date('d-m-Y'),$fecha_vencimiento).' </td>';
+					$html.='<td width="30">'.$this->varios_library->diasDiferencia(date('d-m-Y'),$value['fecha_diferencia']).' </td>';
+					$html.='<td width="45"> '.round($value['total_pagado'],2).'</td>';
+					$html.='<td width="45"> '.$value['total_deuda'].'</td>';
 					$html.='</tr>';
 					$i++;
 					if($i==33)

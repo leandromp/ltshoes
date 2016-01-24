@@ -102,19 +102,50 @@ class Reporte extends CI_Model {
 
 	public function getClientesMoras()
 	{
-		$sql = "select 
-					dpp.plan_pago_id, dpp.fecha_vencimiento,
-				    pp.monto_cuota,pp.id_venta, pp.tipo,
-				    c.nombre, c.apellido, c.direccion
-				from detalle_plan_pago dpp
-				inner join plan_pago pp on (dpp.plan_pago_id=pp.id)
-				inner join venta v on (pp.id_venta = v.id)
-				inner join cliente c on (v.id_cliente=c.id)
-				 where dpp.fecha_vencimiento <= current_date()";
+		$sql = "SELECT 
+			    dpp.plan_pago_id,
+			    DATE_FORMAT(dpp.fecha_vencimiento,'%d/%m/%y') as fecha_vencimiento,
+			     DATE_FORMAT(dpp.fecha_vencimiento,'%d/%m/%Y') as fecha_diferencia,
+			    pp.monto_cuota,
+			    pp.id_venta,
+			    pp.tipo,
+			    c.nombre,
+			    c.apellido,
+			    c.direccion,
+			    dpp.fecha_pago,
+			    v.monto as total_deuda
+			FROM
+			    detalle_plan_pago dpp
+			        INNER JOIN
+			    plan_pago pp ON (dpp.plan_pago_id = pp.id)
+			        INNER JOIN
+			    venta v ON (pp.id_venta = v.id)
+			        INNER JOIN
+			    cliente c ON (v.id_cliente = c.id)
+			WHERE
+			    dpp.fecha_pago IS NULL
+			        AND dpp.fecha_vencimiento <= CURRENT_DATE()";
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		if ($query->num_rows()>0)
 			return $res;
+		else
+			return FALSE;
+	}
+
+	public function pagadoByPlanPago($plan_pago_id)
+	{
+		$sql = "SELECT 
+				    SUM(monto_pago) AS pagado
+				FROM
+				    detalle_plan_pago
+				WHERE
+				    plan_pago_id = ".$plan_pago_id."
+				        AND fecha_pago IS NOT NULL";
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		if ($query->num_rows()>0)
+			return $res[0]['pagado'];
 		else
 			return FALSE;
 	}
