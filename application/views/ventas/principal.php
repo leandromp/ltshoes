@@ -44,7 +44,7 @@
                                             <td><?=$value['nombre'].''.$value['apellido']?></td>
                                             <td><?=$value['telefono']?></td>
                                             
-                                            <td><button role="button" class="btn btn-danger" onclick="eliminar(<?=$value['id']?>,'<?=$modulo_nombre?>')"> Eliminar </button> </td>
+                                            <td><button role="button" class="btn btn-danger" onclick="combo(<?=$value['id']?>)"> Eliminar </button> </td>
                                              <td><a href="<?=site_url('reportes/imprimir_comprobante_pago/'.$value['id'])?>" target="_blank"><button role="button" class="btn" > <i class="fa fa-print"> </i> </button> </td></a>
                                     <?endforeach;?>
                                 </tbody>

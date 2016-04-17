@@ -348,3 +348,30 @@ function edit(p_id, p_campo,p_tabla)
 	});
 	
 }	
+/*************** funcion para confirmar la eliminacion de una venta ******************/
+function combo(p_id)
+{
+	var respuesta = confirm('¿Desea eliminar esta venta?');
+	//var id_combo = '#'+p_campo+'_'+p_id;
+	//var valor_actual = $(id_combo).prop('checked');
+	//console.log(valor_actual);
+	if(respuesta == true)
+		{
+			//var id='#'+p_campo;
+			$.post(URL_BASE+'ventas/eliminar', {id:p_id}, function(data) {
+					/*switch(data)
+					{
+						case '1':
+							//$(id).val(valor);
+						break;
+					}*/
+				});
+		}
+	else
+	{
+		if(valor_actual==true)
+			$(id_combo).prop('checked', false);
+		else
+			$(id_combo).prop('checked', true);
+	}
+}

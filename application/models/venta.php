@@ -5,7 +5,7 @@
 			public function listado()
 			{	
 				$sql="SELECT v.id,v.fecha,v.monto,c.nombre,c.apellido,c.telefono FROM venta v
-					INNER JOIN cliente c ON v.id_cliente=c.id ORDER BY v.id DESC ";
+					INNER JOIN cliente c ON v.id_cliente=c.id where v.eliminada=0 ORDER BY v.id DESC ";
 				$query=$this->db->query($sql);
 				$resultado=$query->result_array();
 				return $resultado;
@@ -21,8 +21,9 @@
 
 			public function delete($venta_id)
 			{
-				$this->db->where('id',$venta_id);
-				if($this->db->delete("venta"))
+				$sql="UPDATE venta set eliminada=1 where id=".$venta_id;
+				echo $sql;
+				if($this->db->query($sql))
 						return TRUE;
 				else
 					return FALSE;
